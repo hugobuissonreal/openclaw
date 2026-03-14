@@ -9,7 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{--bg:#07090c;--bg2:#0d1117;--panel:#0f141a;--line:#1d2530;--text:#f4f7fb;--muted:#8f9baa;--accent:#8fb7ff;--accent2:#79d7bd;--shadow:0 20px 60px rgba(0,0,0,.35);--radius:20px}
-    *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);font-family:Inter,system-ui,sans-serif}.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{border-right:1px solid rgba(255,255,255,.05);padding:24px 18px;position:sticky;top:0;height:100vh;background:rgba(7,9,12,.88);backdrop-filter:blur(14px)}.brand{font-size:20px;font-weight:800;letter-spacing:-.04em;margin-bottom:28px}.nav{display:grid;gap:8px}.nav a{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid transparent;border-radius:14px;color:var(--muted);font-size:14px}.nav a.active,.nav a:hover{background:rgba(255,255,255,.03);border-color:var(--line);color:var(--text)}.ico{width:16px;height:16px;display:inline-block}.main{padding:28px}.shell{max-width:1180px}.head{margin-bottom:24px}.title{font-size:42px;font-weight:800;letter-spacing:-.05em;line-height:.95}.sub{color:var(--muted);font-size:14px}.section{background:linear-gradient(180deg,rgba(15,20,26,.95),rgba(11,16,21,.95));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}.center{display:grid;justify-items:center;gap:14px}.node{padding:18px 20px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02);min-width:260px;text-align:center}.ceo{min-width:340px}.managerGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%}.workers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.worker{padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);font-size:13px;color:var(--muted)}.worker b{display:block;color:var(--text);margin-bottom:4px}.connector{width:2px;height:28px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(143,183,255,.65))}.role{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:6px}.name{font-size:28px;font-weight:800;letter-spacing:-.04em;margin-bottom:6px}.footer{margin-top:18px;color:var(--muted);font-size:12px}@media (max-width:980px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid rgba(255,255,255,.05)}.managerGrid,.workers{grid-template-columns:1fr}.main{padding:20px}}
+    *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);font-family:Inter,system-ui,sans-serif}
+    a{text-decoration:none;color:inherit}.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{border-right:1px solid rgba(255,255,255,.05);padding:24px 18px;position:sticky;top:0;height:100vh;background:rgba(7,9,12,.88);backdrop-filter:blur(14px)}
+    .brand{font-size:20px;font-weight:800;letter-spacing:-.04em;margin-bottom:28px}.nav{display:grid;gap:8px}.nav a{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid transparent;border-radius:14px;color:var(--muted);font-size:14px}.nav a.active,.nav a:hover{background:rgba(255,255,255,.03);border-color:var(--line);color:var(--text)}
+    .ico{width:16px;height:16px;display:inline-block}.main{padding:28px}.shell{max-width:1180px}.head{margin-bottom:24px}.title{font-size:42px;font-weight:800;letter-spacing:-.05em;line-height:.95}.sub{color:var(--muted);font-size:14px}
+    .section{background:linear-gradient(180deg,rgba(15,20,26,.95),rgba(11,16,21,.95));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+    .center{display:grid;justify-items:center;gap:14px}.node{padding:18px 20px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02);text-align:center}.ceo{min-width:340px}.role{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:6px}.name{font-size:30px;font-weight:800;letter-spacing:-.04em;margin-bottom:6px}.connector{width:2px;height:28px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(143,183,255,.65))}
+    .managerGrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%}.workers{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}.worker{padding:12px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);font-size:13px;color:var(--muted);text-align:left}.worker b{display:block;color:var(--text);margin-bottom:4px}
+    .footer{margin-top:18px;color:var(--muted);font-size:12px}@media (max-width:1100px){.workers{grid-template-columns:repeat(2,1fr)}} @media (max-width:980px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid rgba(255,255,255,.05)}.managerGrid,.workers{grid-template-columns:1fr}.main{padding:20px}}
   </style>
 </head>
 <body>
@@ -23,16 +30,36 @@
       </nav>
     </aside>
     <main class="main"><div class="shell">
-      <div class="head"><div class="title">Agents</div><div class="sub">Hiérarchie agentique</div></div>
+      <div class="head"><div class="title">Agents</div><div class="sub">CEO → managers → workers</div></div>
       <section class="section center">
         <div class="node ceo"><div class="role">CEO</div><div class="name">Harold</div><div class="sub">orchestration · arbitrage · vision système</div></div>
         <div class="connector"></div>
         <div class="managerGrid">
-          <div class="node"><div class="role">Manager · Reels</div><div class="name">Astrid</div><div class="workers"><div class="worker"><b>Rustik</b>motivation</div><div class="worker"><b>Krokmou</b>transformation</div><div class="worker"><b>Tempête</b>hooks</div></div></div>
-          <div class="node"><div class="role">Manager · Carousels</div><div class="name">Valka</div><div class="workers"><div class="worker"><b>Crochefer</b>conversion</div><div class="worker"><b>Harfang</b>pédagogie</div><div class="worker"><b>Gronk</b>authority</div></div></div>
+          <div class="node">
+            <div class="role">Manager · Reels</div>
+            <div class="name">Astrid</div>
+            <div class="workers">
+              <div class="worker"><b>Rustik</b>motivation reels</div>
+              <div class="worker"><b>Edrik</b>hooks reels</div>
+              <div class="worker"><b>Stoick</b>authority reels</div>
+              <div class="worker"><b>Mildew</b>story reels</div>
+              <div class="worker"><b>Snotlout</b>conversion reels</div>
+            </div>
+          </div>
+          <div class="node">
+            <div class="role">Manager · Carousels</div>
+            <div class="name">Valka</div>
+            <div class="workers">
+              <div class="worker"><b>Ruffnut</b>conversion carousels</div>
+              <div class="worker"><b>Tuffnut</b>educational carousels</div>
+              <div class="worker"><b>Gobber</b>authority carousels</div>
+              <div class="worker"><b>Fishlegs</b>deep-dive carousels</div>
+              <div class="worker"><b>Heather</b>narrative carousels</div>
+            </div>
+          </div>
         </div>
       </section>
-      <div class="footer">CEO → managers → workers</div>
+      <div class="footer"></div>
     </div></main>
   </div>
 </body>
