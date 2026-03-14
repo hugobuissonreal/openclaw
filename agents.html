@@ -6,107 +6,23 @@
   <title>OpenClaw · Agents</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#06080b;
-      --bg2:#0b1016;
-      --panel:#0e141b;
-      --line:rgba(148,184,255,.22);
-      --line-soft:rgba(148,184,255,.12);
-      --text:#eef4fb;
-      --muted:#8d99a8;
-      --ceo:#d6b072;
-      --manager:#8fb7ff;
-      --worker:#78d5bb;
-      --shadow:0 30px 80px rgba(0,0,0,.42);
-      --radius:22px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:radial-gradient(circle at top, rgba(143,183,255,.05), transparent 20%),linear-gradient(180deg,var(--bg),var(--bg2))}
-    a{text-decoration:none;color:inherit}
-    .app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
-    .side{border-right:1px solid rgba(255,255,255,.05);padding:24px 18px;position:sticky;top:0;height:100vh;background:rgba(6,8,11,.9);backdrop-filter:blur(14px)}
-    .brand{font-family:Sora,sans-serif;font-size:20px;font-weight:700;letter-spacing:-.04em;margin-bottom:28px}
-    .nav{display:grid;gap:8px}
-    .nav a{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid transparent;border-radius:14px;color:var(--muted);font-size:14px}
-    .nav a.active,.nav a:hover{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08);color:var(--text)}
-    .main{padding:28px}
-    .shell{max-width:1280px}
-    .head{margin-bottom:22px}
-    .title{font-family:Sora,sans-serif;font-size:44px;font-weight:700;letter-spacing:-.06em;line-height:.95}
-    .sub{color:var(--muted);font-size:14px;margin-top:8px}
-
-    .board{
-      position:relative;
-      padding:42px 28px 34px;
-      min-height:820px;
-      border:1px solid rgba(255,255,255,.05);
-      border-radius:28px;
-      background:
-        radial-gradient(circle at top center, rgba(214,176,114,.06), transparent 18%),
-        linear-gradient(180deg, rgba(14,20,27,.96), rgba(10,14,20,.96));
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .board:before{
-      content:"";
-      position:absolute; inset:0;
-      background-image: linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px);
-      background-size: 32px 32px;
-      mask-image: linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,0));
-      pointer-events:none;
-    }
-
-    .node{
-      position:absolute;
-      width:190px;
-      padding:16px 16px 15px;
-      border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(6px);
-      box-shadow:0 12px 30px rgba(0,0,0,.24);
-    }
-    .node.big{width:260px}
-    .node.ceo{border-color:rgba(214,176,114,.35); box-shadow:0 0 0 1px rgba(214,176,114,.08), 0 18px 40px rgba(0,0,0,.34)}
-    .node.manager{border-color:rgba(143,183,255,.26)}
-    .node.worker{border-color:rgba(120,213,187,.22)}
-    .role{font-size:10px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; margin-bottom:8px}
-    .ceo .role{color:var(--ceo)} .manager .role{color:var(--manager)} .worker .role{color:var(--worker)}
-    .name{font-family:Sora,sans-serif; font-size:24px; font-weight:700; letter-spacing:-.05em; margin-bottom:6px}
-    .node.worker .name{font-size:18px}
-    .meta{font-size:12px; color:var(--muted); line-height:1.45}
-
-    svg.lines{position:absolute; inset:0; width:100%; height:100%; pointer-events:none}
-    .line{fill:none; stroke:var(--line); stroke-width:2; stroke-linecap:round; stroke-dasharray:5 8}
-    .line.soft{stroke:var(--line-soft)}
-    .glow{filter: drop-shadow(0 0 10px rgba(143,183,255,.18));}
-
-    .harold{left:50%; top:54px; transform:translateX(-50%)}
-    .astrid{left:220px; top:235px}
-    .valka{right:220px; top:235px}
-
-    .r1{left:70px; top:470px}
-    .r2{left:275px; top:470px}
-    .r3{left:480px; top:470px}
-    .r4{left:172px; top:640px}
-    .r5{left:377px; top:640px}
-
-    .c1{right:480px; top:470px}
-    .c2{right:275px; top:470px}
-    .c3{right:70px; top:470px}
-    .c4{right:377px; top:640px}
-    .c5{right:172px; top:640px}
-
-    @media (max-width: 1180px){
-      .app{grid-template-columns:1fr}
-      .side{position:relative;height:auto;border-right:0;border-bottom:1px solid rgba(255,255,255,.05)}
-      .board{min-height:auto;padding:22px;display:grid;gap:14px}
-      .node, .node.big{position:relative;left:auto;right:auto;top:auto;transform:none;width:100%}
-      svg.lines{display:none}
-      .main{padding:20px}
-    }
+    :root{--bg:#07090c;--bg2:#0d1117;--panel:#0f141a;--line:#213040;--text:#f4f7fb;--muted:#8f9baa;--accent:#8fb7ff;--ceo:#d8b06a;--manager:#8fb7ff;--worker:#78d5bb;--shadow:0 20px 60px rgba(0,0,0,.35);--radius:20px}
+    *{box-sizing:border-box}html,body{height:100%}body{margin:0;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);font-family:Inter,system-ui,sans-serif;overflow:hidden}a{text-decoration:none;color:inherit}
+    .app{display:grid;grid-template-columns:240px 1fr;height:100vh}.side{border-right:1px solid rgba(255,255,255,.05);padding:24px 18px;background:rgba(7,9,12,.92);backdrop-filter:blur(14px)}
+    .brand{font-size:20px;font-weight:800;letter-spacing:-.04em;margin-bottom:28px}.nav{display:grid;gap:8px}.nav a{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid transparent;border-radius:14px;color:var(--muted);font-size:14px}.nav a.active,.nav a:hover{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.08);color:var(--text)}
+    .main{display:grid;grid-template-rows:auto 1fr;padding:20px 24px;gap:16px;min-width:0}.top{display:flex;justify-content:space-between;align-items:end;gap:16px}.title{font-size:42px;font-weight:800;letter-spacing:-.05em;line-height:.95}.sub{color:var(--muted);font-size:14px}.controls{display:flex;gap:10px;align-items:center}.btn{padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.03);color:var(--text);cursor:pointer}.zoomLabel{color:var(--muted);font-size:13px;min-width:46px;text-align:right}
+    .board{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);border-radius:24px;background:radial-gradient(circle at top, rgba(143,183,255,.06), transparent 18%),linear-gradient(180deg,rgba(15,20,26,.98),rgba(10,14,20,.98));box-shadow:var(--shadow)}
+    .board:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);background-size:36px 36px;pointer-events:none}
+    .viewport{position:absolute;inset:0;cursor:grab}.viewport.dragging{cursor:grabbing}.scene{position:absolute;left:0;top:0;width:1600px;height:1100px;transform-origin:0 0}
+    svg{position:absolute;inset:0;width:1600px;height:1100px;pointer-events:none}.link{fill:none;stroke:rgba(143,183,255,.34);stroke-width:2.2;stroke-dasharray:6 8;stroke-linecap:round}.link.soft{stroke:rgba(143,183,255,.22)}
+    .node{position:absolute;width:190px;padding:16px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);box-shadow:0 14px 30px rgba(0,0,0,.22);backdrop-filter:blur(6px)}
+    .node.ceo{width:260px;border-color:rgba(216,176,106,.36)}.node.manager{border-color:rgba(143,183,255,.25)}.node.worker{border-color:rgba(120,213,187,.22)}
+    .role{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}.ceo .role{color:var(--ceo)}.manager .role{color:var(--manager)}.worker .role{color:var(--worker)}
+    .name{font-size:24px;font-weight:800;letter-spacing:-.04em;margin-bottom:6px}.worker .name{font-size:18px}.meta{font-size:12px;color:var(--muted);line-height:1.45}
+    .hint{position:absolute;right:16px;bottom:14px;color:var(--muted);font-size:12px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.06);padding:8px 10px;border-radius:999px}
+    @media (max-width:980px){body{overflow:auto}.app{grid-template-columns:1fr;height:auto}.side{border-right:0;border-bottom:1px solid rgba(255,255,255,.05)}.main{min-height:100vh}.title{font-size:34px}}
   </style>
 </head>
 <body>
@@ -121,65 +37,117 @@
     </aside>
 
     <main class="main">
-      <div class="shell">
-        <div class="head">
+      <div class="top">
+        <div>
           <div class="title">Agents</div>
-          <div class="sub">Organigramme global</div>
+          <div class="sub">Canvas navigable</div>
         </div>
-
-        <section class="board">
-          <svg class="lines glow" viewBox="0 0 1280 820" preserveAspectRatio="none">
-            <!-- CEO to managers -->
-            <path class="line" d="M640 150 L640 200 L350 200 L350 235" />
-            <path class="line" d="M640 150 L640 200 L930 200 L930 235" />
-
-            <!-- Astrid to reels workers -->
-            <path class="line soft" d="M315 325 L315 390 L165 390 L165 470" />
-            <path class="line soft" d="M315 325 L315 390 L370 390 L370 470" />
-            <path class="line soft" d="M315 325 L315 390 L575 390 L575 470" />
-            <path class="line soft" d="M315 325 L315 560 L268 560 L268 640" />
-            <path class="line soft" d="M315 325 L315 560 L473 560 L473 640" />
-
-            <!-- Valka to carousel workers -->
-            <path class="line soft" d="M965 325 L965 390 L705 390 L705 470" />
-            <path class="line soft" d="M965 325 L965 390 L910 390 L910 470" />
-            <path class="line soft" d="M965 325 L965 390 L1115 390 L1115 470" />
-            <path class="line soft" d="M965 325 L965 560 L808 560 L808 640" />
-            <path class="line soft" d="M965 325 L965 560 L1013 560 L1013 640" />
-          </svg>
-
-          <div class="node big ceo harold">
-            <div class="role">CEO</div>
-            <div class="name">Harold</div>
-            <div class="meta">orchestration · arbitrage · vision système</div>
-          </div>
-
-          <div class="node big manager astrid">
-            <div class="role">Manager · Reels</div>
-            <div class="name">Astrid</div>
-            <div class="meta">supervision du pôle reels</div>
-          </div>
-
-          <div class="node big manager valka">
-            <div class="role">Manager · Carousels</div>
-            <div class="name">Valka</div>
-            <div class="meta">supervision du pôle carousels</div>
-          </div>
-
-          <div class="node worker r1"><div class="role">Worker</div><div class="name">Rustik</div><div class="meta">motivation reels</div></div>
-          <div class="node worker r2"><div class="role">Worker</div><div class="name">Stoick</div><div class="meta">authority reels</div></div>
-          <div class="node worker r3"><div class="role">Worker</div><div class="name">Snotlout</div><div class="meta">conversion reels</div></div>
-          <div class="node worker r4"><div class="role">Worker</div><div class="name">Eret</div><div class="meta">proof reels</div></div>
-          <div class="node worker r5"><div class="role">Worker</div><div class="name">Mildew</div><div class="meta">story reels</div></div>
-
-          <div class="node worker c1"><div class="role">Worker</div><div class="name">Ruffnut</div><div class="meta">conversion carousels</div></div>
-          <div class="node worker c2"><div class="role">Worker</div><div class="name">Tuffnut</div><div class="meta">educational carousels</div></div>
-          <div class="node worker c3"><div class="role">Worker</div><div class="name">Gobber</div><div class="meta">authority carousels</div></div>
-          <div class="node worker c4"><div class="role">Worker</div><div class="name">Fishlegs</div><div class="meta">deep-dive carousels</div></div>
-          <div class="node worker c5"><div class="role">Worker</div><div class="name">Heather</div><div class="meta">narrative carousels</div></div>
-        </section>
+        <div class="controls">
+          <button class="btn" id="zoomOut">−</button>
+          <button class="btn" id="reset">Reset</button>
+          <button class="btn" id="zoomIn">+</button>
+          <div class="zoomLabel" id="zoomLabel">100%</div>
+        </div>
       </div>
+
+      <section class="board">
+        <div class="viewport" id="viewport">
+          <div class="scene" id="scene">
+            <svg viewBox="0 0 1600 1100" preserveAspectRatio="none">
+              <path class="link" d="M800 170 L800 230 L460 230 L460 290" />
+              <path class="link" d="M800 170 L800 230 L1140 230 L1140 290" />
+
+              <path class="link soft" d="M460 380 L460 450 L220 450 L220 530" />
+              <path class="link soft" d="M460 380 L460 450 L430 450 L430 530" />
+              <path class="link soft" d="M460 380 L460 450 L640 450 L640 530" />
+              <path class="link soft" d="M460 380 L460 450 L850 450 L850 530" />
+              <path class="link soft" d="M460 380 L460 450 L325 450 L325 760" />
+
+              <path class="link soft" d="M1140 380 L1140 450 L960 450 L960 530" />
+              <path class="link soft" d="M1140 380 L1140 450 L1170 450 L1170 530" />
+              <path class="link soft" d="M1140 380 L1140 450 L1380 450 L1380 530" />
+              <path class="link soft" d="M1140 380 L1140 450 L1065 450 L1065 760" />
+              <path class="link soft" d="M1140 380 L1140 450 L1275 450 L1275 760" />
+            </svg>
+
+            <div class="node ceo" style="left:670px;top:70px">
+              <div class="role">CEO</div>
+              <div class="name">Harold</div>
+              <div class="meta">orchestration · arbitrage · vision système</div>
+            </div>
+
+            <div class="node manager" style="left:365px;top:290px">
+              <div class="role">Manager · Reels</div>
+              <div class="name">Astrid</div>
+              <div class="meta">supervision du pôle reels</div>
+            </div>
+
+            <div class="node manager" style="left:1045px;top:290px">
+              <div class="role">Manager · Carousels</div>
+              <div class="name">Valka</div>
+              <div class="meta">supervision du pôle carousels</div>
+            </div>
+
+            <div class="node worker" style="left:125px;top:530px"><div class="role">Worker</div><div class="name">Rustik</div><div class="meta">motivation reels</div></div>
+            <div class="node worker" style="left:335px;top:530px"><div class="role">Worker</div><div class="name">Stoick</div><div class="meta">authority reels</div></div>
+            <div class="node worker" style="left:545px;top:530px"><div class="role">Worker</div><div class="name">Snotlout</div><div class="meta">conversion reels</div></div>
+            <div class="node worker" style="left:755px;top:530px"><div class="role">Worker</div><div class="name">Eret</div><div class="meta">proof reels</div></div>
+            <div class="node worker" style="left:230px;top:760px"><div class="role">Worker</div><div class="name">Mildew</div><div class="meta">story reels</div></div>
+
+            <div class="node worker" style="left:865px;top:530px"><div class="role">Worker</div><div class="name">Ruffnut</div><div class="meta">conversion carousels</div></div>
+            <div class="node worker" style="left:1075px;top:530px"><div class="role">Worker</div><div class="name">Tuffnut</div><div class="meta">educational carousels</div></div>
+            <div class="node worker" style="left:1285px;top:530px"><div class="role">Worker</div><div class="name">Gobber</div><div class="meta">authority carousels</div></div>
+            <div class="node worker" style="left:970px;top:760px"><div class="role">Worker</div><div class="name">Fishlegs</div><div class="meta">deep-dive carousels</div></div>
+            <div class="node worker" style="left:1180px;top:760px"><div class="role">Worker</div><div class="name">Heather</div><div class="meta">narrative carousels</div></div>
+          </div>
+        </div>
+        <div class="hint">Glisser pour déplacer · molette pour zoomer</div>
+      </section>
     </main>
   </div>
+
+  <script>
+    const viewport = document.getElementById('viewport');
+    const scene = document.getElementById('scene');
+    const zoomLabel = document.getElementById('zoomLabel');
+    let scale = 0.72;
+    let x = 40;
+    let y = 10;
+    let dragging = false;
+    let startX = 0, startY = 0, originX = 0, originY = 0;
+
+    function render(){
+      scene.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      zoomLabel.textContent = Math.round(scale * 100) + '%';
+    }
+    function clampScale(v){ return Math.max(0.45, Math.min(1.4, v)); }
+    render();
+
+    viewport.addEventListener('mousedown', (e)=>{
+      dragging = true;
+      viewport.classList.add('dragging');
+      startX = e.clientX; startY = e.clientY;
+      originX = x; originY = y;
+    });
+    window.addEventListener('mousemove', (e)=>{
+      if(!dragging) return;
+      x = originX + (e.clientX - startX);
+      y = originY + (e.clientY - startY);
+      render();
+    });
+    window.addEventListener('mouseup', ()=>{
+      dragging = false;
+      viewport.classList.remove('dragging');
+    });
+    viewport.addEventListener('wheel', (e)=>{
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 0.06 : -0.06;
+      scale = clampScale(scale + delta);
+      render();
+    }, {passive:false});
+    document.getElementById('zoomIn').addEventListener('click', ()=>{ scale = clampScale(scale + 0.08); render(); });
+    document.getElementById('zoomOut').addEventListener('click', ()=>{ scale = clampScale(scale - 0.08); render(); });
+    document.getElementById('reset').addEventListener('click', ()=>{ scale = 0.72; x = 40; y = 10; render(); });
+  </script>
 </body>
 </html>
