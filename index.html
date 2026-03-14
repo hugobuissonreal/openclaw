@@ -3,154 +3,58 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>OpenClaw · Architecture Spec</title>
+  <title>OpenClaw · Architecture</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b0d10;--bg2:#12161b;--panel:#151a20;--panel2:#1b2129;--line:#2a313a;
-      --text:#f4f1ea;--muted:#b6b0a4;--gold:#d5b06b;--goldBg:rgba(213,176,107,.12);
-      --blue:#86a8ff;--green:#6fd1b4;--red:#ff8d8d;--shadow:0 24px 70px rgba(0,0,0,.35);
-      --radius:24px;--max:1280px;
-    }
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;color:var(--text);font-family:Manrope,system-ui,sans-serif;background:
-      radial-gradient(circle at top left, rgba(213,176,107,.08), transparent 20%),
-      linear-gradient(180deg,#090b0e 0%,#0b0d10 100%)}
-    a{text-decoration:none;color:inherit}
-    .wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto}
-    .nav{position:sticky;top:0;z-index:20;background:rgba(11,13,16,.8);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.04)}
-    .navin{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
-    .brand{font-family:Newsreader,serif;font-size:24px;letter-spacing:-.02em}
-    .menu{display:flex;gap:18px;color:var(--muted);font-size:14px}
-    .hero{padding:56px 0 30px;display:grid;grid-template-columns:1.15fr .85fr;gap:22px}
-    .card{background:linear-gradient(180deg,rgba(21,26,32,.95),rgba(16,20,25,.95));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}
-    .eyebrow{display:inline-flex;gap:10px;align-items:center;color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-size:12px;margin-bottom:16px}
-    .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold)}
-    h1,h2,h3,p{margin:0}.h-serif{font-family:Newsreader,serif;letter-spacing:-.04em}
-    h1{font-size:clamp(40px,7vw,76px);line-height:.96;max-width:10ch;margin-bottom:16px}
-    .lead{color:var(--muted);line-height:1.7;font-size:17px;max-width:62ch}
-    .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.chip{padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:13px;background:rgba(255,255,255,.03)}
-    .stats{display:grid;gap:16px}.stat b{display:block;font-size:38px;font-family:Newsreader,serif;margin-bottom:6px}
-    section{padding:14px 0}.head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:18px}
-    h2{font-size:35px}.sub{color:var(--muted);line-height:1.65;max-width:70ch}
-    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .tag{display:inline-block;padding:7px 10px;border-radius:999px;font-size:12px;margin-bottom:12px;background:var(--goldBg);color:var(--gold)}
-    .block{min-height:220px}.block p{color:var(--muted);line-height:1.65;font-size:14px}.block h3{font-size:20px;margin-bottom:8px}
-    .diagram{display:grid;grid-template-columns:1fr;gap:16px}.level{padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.025)}
-    .level h3{margin-bottom:8px}.level p{color:var(--muted);line-height:1.6}
-    .level ul{margin:10px 0 0 18px;color:var(--muted);line-height:1.7}
-    .cols{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
-    details{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
-    summary{cursor:pointer;font-weight:700;list-style:none} summary::-webkit-details-marker{display:none}
-    .mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#eadfc8}
-    .spec{display:grid;gap:14px}.specItem{padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02)}
-    .specItem h4{margin:0 0 10px;font-size:17px}.specItem p{margin:6px 0;color:var(--muted);line-height:1.6;font-size:14px}
-    .kv{color:var(--text);font-weight:700}.verdict{display:inline-block;margin-top:8px;padding:6px 10px;border-radius:999px;font-size:12px;border:1px solid var(--line)}
-    .keep{color:var(--green)} .rename{color:var(--gold)} .move{color:var(--blue)} .opt{color:var(--muted)} .del{color:var(--red)}
+    :root{--bg:#07090c;--bg2:#0c1015;--panel:#0f141a;--panel2:#131a22;--line:#1f2833;--text:#f3f7fb;--muted:#93a0af;--accent:#8fb7ff;--accent2:#7ee0c3;--gold:#d2ab6f;--shadow:0 30px 80px rgba(0,0,0,.38);--radius:24px;--max:1240px}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:radial-gradient(circle at top, rgba(143,183,255,.06), transparent 20%),linear-gradient(180deg,var(--bg),var(--bg2))}a{text-decoration:none;color:inherit}
+    .wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto}.nav{position:sticky;top:0;z-index:20;background:rgba(7,9,12,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.04)}
+    .navin{display:flex;justify-content:space-between;align-items:center;padding:16px 0}.brand{font-family:Sora,sans-serif;font-size:22px;font-weight:700;letter-spacing:-.04em}.menu{display:flex;gap:10px}.menu a{padding:10px 14px;border:1px solid transparent;border-radius:999px;color:var(--muted);font-size:14px}.menu a.active,.menu a:hover{border-color:var(--line);background:rgba(255,255,255,.03);color:var(--text)}
+    .hero{padding:56px 0 26px;display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.card{background:linear-gradient(180deg,rgba(15,20,26,.94),rgba(11,16,21,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}.eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 10px;border-radius:999px;background:rgba(143,183,255,.10);color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}.dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+    h1,h2,h3,p{margin:0}h1,h2,h3{font-family:Sora,sans-serif;letter-spacing:-.05em}h1{font-size:clamp(42px,8vw,86px);line-height:.92;max-width:9ch;margin-bottom:16px}h2{font-size:30px;margin-bottom:10px}h3{font-size:18px;margin-bottom:8px}.lead,.sub,p{color:var(--muted);line-height:1.7}.lead{font-size:17px}
+    .stats{display:grid;gap:16px}.stat b{display:block;font-family:Sora,sans-serif;font-size:38px;margin-bottom:6px;color:var(--text)}
+    section{padding:14px 0}.head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin-bottom:18px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.block{min-height:210px}.tag{display:inline-block;padding:7px 10px;border-radius:999px;background:rgba(126,224,195,.10);color:var(--accent2);font-size:12px;font-weight:700;margin-bottom:12px}
+    .folders{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.folder{position:relative;overflow:hidden}.folderIcon{width:62px;height:44px;border-radius:14px 14px 12px 12px;background:linear-gradient(180deg,#f0c97d,#c99e58);position:relative;margin-bottom:18px;box-shadow:0 16px 30px rgba(201,158,88,.18)}.folderIcon:before{content:"";position:absolute;top:-8px;left:10px;width:26px;height:12px;border-radius:8px 8px 0 0;background:#ddb66c}
+    .folder h3{font-size:20px}.folder p{font-size:14px}.folder a.cta{display:inline-flex;margin-top:16px;padding:10px 14px;border:1px solid var(--line);border-radius:999px;color:var(--text);background:rgba(255,255,255,.03)}
+    .schema{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:14px;align-items:center}.pill{padding:18px;border:1px solid var(--line);border-radius:20px;text-align:center;background:rgba(255,255,255,.025)}.pill b{display:block;font-family:Sora,sans-serif;font-size:18px;margin-bottom:6px}.arrow{color:var(--gold);font-size:24px;text-align:center}
     .footer{padding:34px 0 60px;color:var(--muted);text-align:center;font-size:13px}
-    @media (max-width: 980px){.hero,.grid4,.grid3,.cols{grid-template-columns:1fr}.menu{display:none}h1{max-width:none}}
+    @media (max-width:1000px){.hero,.grid3,.folders,.schema{grid-template-columns:1fr}.menu{gap:6px}.menu a{padding:8px 10px}.arrow{display:none}h1{max-width:none}}
   </style>
 </head>
 <body>
-  <nav class="nav"><div class="wrap navin"><div class="brand">OpenClaw Architecture</div><div class="menu"><a href="#overview">Vue</a><a href="#layers">Niveaux</a><a href="#workspace">Workspace</a><a href="#spec">Spec</a><a href="./agents.html">Agents</a></div></div></nav>
+  <nav class="nav"><div class="wrap navin"><div class="brand">OpenClaw Architecture</div><div class="menu"><a href="./index.html" class="active">Architecture</a><a href="./agents.html">Agents</a><a href="./arborescence.html">Arborescence</a></div></div></nav>
   <main class="wrap">
-    <section class="hero" id="overview">
-      <div class="card">
-        <div class="eyebrow"><span class="dot"></span> Content OS · Multi-level architecture</div>
-        <h1 class="h-serif">Comprendre vite, sans se perdre.</h1>
-        <p class="lead">Cette version illustre ton architecture comme un système hiérarchique : un socle global partagé, puis des couches privées par rôle — CEO, manager, worker — avec des blocs transversaux pour l’analyse, les opérations et l’infrastructure.</p>
-        <div class="chips"><span class="chip">Global partagé</span><span class="chip">CEO privé</span><span class="chip">Manager optionnel</span><span class="chip">Worker local</span><span class="chip">Analytics</span><span class="chip">Ops</span><span class="chip">Infra</span><span class="chip">Supabase</span></div>
-      </div>
-      <div class="stats">
-        <div class="card stat"><b>4</b>niveaux hiérarchiques</div>
-        <div class="card stat"><b>8</b>blocs structurels</div>
-        <div class="card stat"><b>1</b>objectif : lisibilité + exécution</div>
-      </div>
+    <section class="hero">
+      <div class="card"><div class="eyebrow"><span class="dot"></span> Vue d’ensemble</div><h1>Un système lisible. Pas un empilement de docs.</h1><p class="lead">Cette interface sert à comprendre ton système rapidement : le niveau global partagé, les agents hiérarchisés, l’arborescence de travail et la place de Supabase dans la boucle d’amélioration.</p></div>
+      <div class="stats"><div class="card stat"><b>Global</b><span>cadre partagé entre tous les agents</span></div><div class="card stat"><b>CEO</b><span>orchestration, arbitrage, vision système</span></div><div class="card stat"><b>Workers</b><span>production, mesure, itération</span></div></div>
     </section>
 
-    <section id="layers">
-      <div class="head"><div><h2 class="h-serif">Les niveaux</h2><p class="sub">Tous les agents ne lisent pas tout. La hiérarchie documentaire suit la hiérarchie agentique.</p></div></div>
-      <div class="diagram">
-        <div class="level card"><div class="tag">Partagé par tous</div><h3>Global</h3><p>Le socle commun : mémoire durable, contexte métier, règles système, état opérationnel, standards partagés et protocoles communs.</p></div>
-        <div class="cols">
-          <div class="level card"><div class="tag">Privé</div><h3>CEO</h3><p>La couche de pilotage. Elle contient l’orchestration, la délégation, les learnings transversaux et la roadmap structurelle.</p><ul><li>Lit le global en entier</li><li>Arbitre et structure</li><li>Ne partage pas tout avec les workers</li></ul></div>
-          <div class="level card"><div class="tag">Optionnel</div><h3>Manager</h3><p>Le niveau intermédiaire quand la structure grossit. Il supervise un pôle ou plusieurs workers sans surcharger le CEO.</p><ul><li>Lit le global utile</li><li>Supervise un sous-système</li><li>Remonte vers le CEO</li></ul></div>
-        </div>
-        <div class="level card"><div class="tag">Privé</div><h3>Worker</h3><p>La couche spécialisée d’exécution. Un worker lit le global utile, ses standards partagés et sa couche locale de production, de métriques et d’amélioration.</p></div>
-      </div>
-    </section>
-
-    <section id="workspace">
-      <div class="head"><div><h2 class="h-serif">Arborescence cible</h2><p class="sub">La structure est pensée par blocs, pas comme une collection de fichiers. Chaque bloc existe pour un besoin précis.</p></div></div>
-      <div class="card">
-        <details open>
-          <summary class="mono">/workspace</summary>
-          <ul>
-            <li><span class="mono">memory/</span> — journal quotidien et historique récent</li>
-            <li><span class="mono">state/</span> — état opérationnel actif</li>
-            <li><span class="mono">context/</span> — vérité métier partagée</li>
-            <li><span class="mono">system/</span> — règles système globales</li>
-            <li><span class="mono">agents/shared/</span> — standards communs</li>
-            <li><span class="mono">agents/ceo/&lt;name&gt;_ceo/</span> — couche privée du CEO</li>
-            <li><span class="mono">agents/managers/&lt;name&gt;_manager/</span> — couche manager</li>
-            <li><span class="mono">agents/workers/&lt;name&gt;_worker/</span> — couche privée du worker</li>
-            <li><span class="mono">analytics/</span> — synthèses lisibles générées automatiquement</li>
-            <li><span class="mono">ops/</span> — protocoles et docs opérationnelles</li>
-            <li><span class="mono">infra/</span> — scripts, SQL, migrations, maintenance technique</li>
-            <li><span class="mono">.learnings/</span> — erreurs, corrections, apprentissages d’exécution</li>
-          </ul>
-        </details>
+    <section>
+      <div class="head"><div><h2>Navigation</h2><p class="sub">Une page = une section mentale. Pas de surcharge.</p></div></div>
+      <div class="folders">
+        <div class="card folder"><div class="folderIcon"></div><h3>Architecture</h3><p>Vue synthétique du système : couches, blocs, rôle de chaque espace et logique générale.</p><a class="cta" href="./index.html">Page actuelle</a></div>
+        <div class="card folder"><div class="folderIcon"></div><h3>Agents</h3><p>Hiérarchie agentique visuelle : Harold, managers, workers et circulation des décisions.</p><a class="cta" href="./agents.html">Ouvrir</a></div>
+        <div class="card folder"><div class="folderIcon"></div><h3>Arborescence</h3><p>Workspace OpenClaw + Supabase, organisés comme une carte claire des blocs du système.</p><a class="cta" href="./arborescence.html">Ouvrir</a></div>
       </div>
     </section>
 
     <section>
-      <div class="head"><div><h2 class="h-serif">Blocs transversaux</h2><p class="sub">Ces blocs n’appartiennent pas à un rôle en particulier, mais structurent la compréhension, le pilotage et la maintenance du système.</p></div></div>
-      <div class="grid4">
-        <div class="card block"><div class="tag">Pilotage</div><h3>Analytics</h3><p>Pas la source brute des données. Une couche de synthèse alimentée automatiquement à partir de Supabase pour aider à lire les tendances, revoir la semaine et arbitrer.</p></div>
-        <div class="card block"><div class="tag">Procédures</div><h3>Ops</h3><p>Les documents qui expliquent comment le système fonctionne : qui lit quoi, qui écrit quoi, comment la structure est pensée et comment elle reste cohérente.</p></div>
-        <div class="card block"><div class="tag">Technique</div><h3>Infra</h3><p>Tout ce qui est purement technique : SQL, scripts, migrations, maintenance. Utile, mais ne doit pas polluer le contexte métier ni la pensée des agents.</p></div>
-        <div class="card block"><div class="tag">Amélioration</div><h3>.learnings</h3><p>La mémoire d’apprentissage de l’agent : erreurs récurrentes, corrections explicites, besoins de capacités, leçons d’exécution réutilisables.</p></div>
-      </div>
+      <div class="head"><div><h2>Logique du système</h2><p class="sub">L’idée n’est pas que tout soit lu par tout le monde. Chaque niveau lit ce qui lui est utile.</p></div></div>
+      <div class="card"><div class="schema"><div class="pill"><b>Global</b><span>contexte, système, mémoire, standards</span></div><div class="arrow">→</div><div class="pill"><b>CEO</b><span>orchestration, roadmap, arbitrage</span></div><div class="arrow">→</div><div class="pill"><b>Workers</b><span>formats, métriques, feedback loops</span></div></div></div>
     </section>
 
     <section>
-      <div class="head"><div><h2 class="h-serif">Supabase</h2><p class="sub">La base commune ne remplace pas la documentation. Elle sert à stocker ce qui doit être structuré, comparé et historisé.</p></div></div>
+      <div class="head"><div><h2>Principes de design</h2><p class="sub">Cette version cherche volontairement à éviter l’effet “site IA générique” : moins de textes, moins de cartes, plus de structure, plus d’air.</p></div></div>
       <div class="grid3">
-        <div class="card block"><div class="tag">Coeur</div><h3>Content</h3><p><span class="mono">content_items</span> est la table mère. Elle contient la fiche principale du contenu et son intention initiale.</p></div>
-        <div class="card block"><div class="tag">Temps</div><h3>Évolution</h3><p><span class="mono">metric_snapshots</span> et <span class="mono">content_analyses</span> gardent l’évolution dans le temps sans écraser l’historique.</p></div>
-        <div class="card block"><div class="tag">Support</div><h3>Contexte</h3><p><span class="mono">human_feedback</span>, <span class="mono">agent_learnings</span>, <span class="mono">run_logs</span> et <span class="mono">asset_registry</span> complètent la boucle d’amélioration.</p></div>
+        <div class="card block"><div class="tag">Minimal</div><h3>Moins de bruit</h3><p>Une page doit répondre à une intention claire, sans accumuler toutes les explications d’un coup.</p></div>
+        <div class="card block"><div class="tag">Hiérarchie</div><h3>Lecture dirigée</h3><p>Les éléments importants doivent se lire avant les détails. Le fond passe avant les effets.</p></div>
+        <div class="card block"><div class="tag">Sobriété</div><h3>Dark mode net</h3><p>Pas de violet cliché, pas de gradients “IA marketing”. Juste du contraste, de l’air et des repères propres.</p></div>
       </div>
     </section>
 
-    <section id="spec">
-      <div class="head"><div><h2 class="h-serif">Spec rapide par bloc</h2><p class="sub">Une version digérée de la spec : rôle, lecture, usage et verdict par grand bloc, pour comprendre vite sans relire tout le document maître.</p></div></div>
-      <div class="spec">
-        <div class="specItem"><h4>Global</h4><p><span class="kv">Rôle :</span> socle partagé de vérité, mémoire, contexte, système et standards.</p><p><span class="kv">Qui le lit :</span> tous les agents, avec des priorités différentes selon leur rôle.</p><p><span class="kv">Quand :</span> démarrage, production, analyse, reprise.</p><p><span class="kv">Quoi écrire :</span> uniquement ce qui reste vrai au niveau système.</p><span class="verdict keep">GARDER</span></div>
-        <div class="specItem"><h4>CEO</h4><p><span class="kv">Rôle :</span> couche privée d’orchestration, d’arbitrage et de vision globale.</p><p><span class="kv">Qui le lit :</span> le CEO uniquement, sauf audit humain.</p><p><span class="kv">Quand :</span> démarrage, pilotage, roadmap, learnings système.</p><p><span class="kv">Quoi écrire :</span> délégation, orchestration, roadmap, learnings transversaux.</p><span class="verdict rename">RENOMMER vers &lt;name&gt;_ceo</span></div>
-        <div class="specItem"><h4>Manager</h4><p><span class="kv">Rôle :</span> couche intermédiaire pour superviser un groupe de workers.</p><p><span class="kv">Qui le lit :</span> managers + CEO.</p><p><span class="kv">Quand :</span> quand la hiérarchie grossit.</p><p><span class="kv">Quoi écrire :</span> scope, team overview, performance review, roadmap de pôle.</p><span class="verdict opt">OPTIONNEL</span></div>
-        <div class="specItem"><h4>Worker</h4><p><span class="kv">Rôle :</span> couche locale d’exécution et d’amélioration par format.</p><p><span class="kv">Qui le lit :</span> worker concerné, manager, CEO.</p><p><span class="kv">Quand :</span> production, mesure, optimisation.</p><p><span class="kv">Quoi écrire :</span> mission, pipeline, rubric, métriques, feedback loop, learnings, cron.</p><span class="verdict keep">GARDER</span></div>
-        <div class="specItem"><h4>Analytics</h4><p><span class="kv">Rôle :</span> synthèses lisibles générées automatiquement à partir de Supabase.</p><p><span class="kv">Qui le lit :</span> CEO d’abord, managers ensuite, humain si besoin.</p><p><span class="kv">Quand :</span> review hebdo, arbitrage, pilotage.</p><p><span class="kv">Quoi écrire :</span> weekly review, scoreboard, experiment summary.</p><span class="verdict keep">GARDER</span></div>
-        <div class="specItem"><h4>Ops</h4><p><span class="kv">Rôle :</span> documentation opérationnelle durable du système.</p><p><span class="kv">Qui le lit :</span> CEO surtout, autres rôles à la demande.</p><p><span class="kv">Quand :</span> quand il faut comprendre, cadrer ou écrire correctement.</p><p><span class="kv">Quoi écrire :</span> protocoles, index, architecture, registre d’agents.</p><span class="verdict keep">GARDER</span></div>
-        <div class="specItem"><h4>Infra</h4><p><span class="kv">Rôle :</span> couche technique d’installation et de maintenance.</p><p><span class="kv">Qui le lit :</span> humain technique, CEO ponctuellement.</p><p><span class="kv">Quand :</span> migration, debug, déploiement, maintenance.</p><p><span class="kv">Quoi écrire :</span> SQL, scripts, archives techniques.</p><span class="verdict keep">GARDER</span></div>
-        <div class="specItem"><h4>.learnings</h4><p><span class="kv">Rôle :</span> mémoire d’apprentissage de l’agent, distincte de MEMORY et du state.</p><p><span class="kv">Qui le lit :</span> CEO surtout.</p><p><span class="kv">Quand :</span> amélioration continue, correction, review.</p><p><span class="kv">Quoi écrire :</span> erreurs, corrections, besoins de capacité, leçons d’exécution.</p><span class="verdict keep">GARDER</span></div>
-      </div>
-    </section>
-
-    
-    <section>
-      <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
-        <div>
-          <div class="tag">Page liée</div>
-          <h3 style="font-size:24px;margin:0 0 6px">Hiérarchie des agents</h3>
-          <p class="sub" style="margin:0">Une page séparée, plus visuelle, pour comprendre le rôle du CEO, du manager et des workers, ainsi que leurs interactions globales.</p>
-        </div>
-        <a href="./agents.html" style="padding:12px 16px;border:1px solid var(--line);border-radius:999px;background:var(--goldBg);color:var(--gold);font-weight:700">Ouvrir la page Agents →</a>
-      </div>
-    </section>
-
-    <div class="footer">Version illustrée de la spec complète · pensée pour comprendre rapidement l’architecture sans lire tout le texte brut.</div>
+    <div class="footer">Architecture · Agents · Arborescence — trois pages séparées pour comprendre vite, sans surcharge.</div>
   </main>
 </body>
 </html>
