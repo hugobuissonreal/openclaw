@@ -54,7 +54,7 @@
   </style>
 </head>
 <body>
-  <nav class="nav"><div class="wrap navin"><div class="brand">OpenClaw Architecture</div><div class="menu"><a href="#overview">Vue</a><a href="#layers">Niveaux</a><a href="#workspace">Workspace</a><a href="#spec">Spec</a></div></div></nav>
+  <nav class="nav"><div class="wrap navin"><div class="brand">OpenClaw Architecture</div><div class="menu"><a href="#overview">Vue</a><a href="#layers">Niveaux</a><a href="#workspace">Workspace</a><a href="#spec">Spec</a><a href="./agents.html">Agents</a></div></div></nav>
   <main class="wrap">
     <section class="hero" id="overview">
       <div class="card">
@@ -135,6 +135,18 @@
         <div class="specItem"><h4>Ops</h4><p><span class="kv">Rôle :</span> documentation opérationnelle durable du système.</p><p><span class="kv">Qui le lit :</span> CEO surtout, autres rôles à la demande.</p><p><span class="kv">Quand :</span> quand il faut comprendre, cadrer ou écrire correctement.</p><p><span class="kv">Quoi écrire :</span> protocoles, index, architecture, registre d’agents.</p><span class="verdict keep">GARDER</span></div>
         <div class="specItem"><h4>Infra</h4><p><span class="kv">Rôle :</span> couche technique d’installation et de maintenance.</p><p><span class="kv">Qui le lit :</span> humain technique, CEO ponctuellement.</p><p><span class="kv">Quand :</span> migration, debug, déploiement, maintenance.</p><p><span class="kv">Quoi écrire :</span> SQL, scripts, archives techniques.</p><span class="verdict keep">GARDER</span></div>
         <div class="specItem"><h4>.learnings</h4><p><span class="kv">Rôle :</span> mémoire d’apprentissage de l’agent, distincte de MEMORY et du state.</p><p><span class="kv">Qui le lit :</span> CEO surtout.</p><p><span class="kv">Quand :</span> amélioration continue, correction, review.</p><p><span class="kv">Quoi écrire :</span> erreurs, corrections, besoins de capacité, leçons d’exécution.</p><span class="verdict keep">GARDER</span></div>
+      </div>
+    </section>
+
+    
+    <section>
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+        <div>
+          <div class="tag">Page liée</div>
+          <h3 style="font-size:24px;margin:0 0 6px">Hiérarchie des agents</h3>
+          <p class="sub" style="margin:0">Une page séparée, plus visuelle, pour comprendre le rôle du CEO, du manager et des workers, ainsi que leurs interactions globales.</p>
+        </div>
+        <a href="./agents.html" style="padding:12px 16px;border:1px solid var(--line);border-radius:999px;background:var(--goldBg);color:var(--gold);font-weight:700">Ouvrir la page Agents →</a>
       </div>
     </section>
 
