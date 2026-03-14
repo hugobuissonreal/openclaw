@@ -12,12 +12,12 @@
     *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);font-family:Inter,system-ui,sans-serif}a{text-decoration:none;color:inherit}
     .app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{border-right:1px solid rgba(255,255,255,.05);padding:24px 18px;position:sticky;top:0;height:100vh;background:rgba(7,9,12,.88);backdrop-filter:blur(14px)}
     .brand{font-size:20px;font-weight:800;letter-spacing:-.04em;margin-bottom:28px}.nav{display:grid;gap:8px}.nav a{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid transparent;border-radius:14px;color:var(--muted);font-size:14px}.nav a.active,.nav a:hover{background:rgba(255,255,255,.03);border-color:var(--line);color:var(--text)}
-    .ico{width:16px;height:16px;display:inline-block}.main{padding:28px}.shell{max-width:1220px}.head{margin-bottom:24px}.title{font-size:42px;font-weight:800;letter-spacing:-.05em;line-height:.95}.sub{color:var(--muted);font-size:14px}
-    .section{background:linear-gradient(180deg,rgba(15,20,26,.95),rgba(11,16,21,.95));border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:28px}
-    .centerTop{display:flex;justify-content:center;margin-bottom:18px}.agent{min-width:170px;max-width:220px;padding:16px 16px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02);text-align:left}.agent.big{min-width:280px;text-align:center}.role{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:6px}.name{font-size:22px;font-weight:800;letter-spacing:-.04em;margin-bottom:6px}.meta{color:var(--muted);font-size:13px;line-height:1.45}
-    .dashed-v{width:2px;height:34px;margin:0 auto;border-left:2px dashed rgba(143,183,255,.55)}
-    .managers{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:8px}.managerCol{display:grid;justify-items:center;gap:12px}.workers{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;width:100%}.workerWrap{display:grid;justify-items:center;gap:10px}.dashed-small{width:2px;height:18px;border-left:2px dashed rgba(143,183,255,.4)}
-    .footer{margin-top:18px;color:var(--muted);font-size:12px}@media (max-width:1200px){.workers{grid-template-columns:repeat(3,1fr)}}@media (max-width:980px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid rgba(255,255,255,.05)}.managers,.workers{grid-template-columns:1fr}.main{padding:20px}.agent,.agent.big{max-width:none;width:100%}}
+    .ico{width:16px;height:16px;display:inline-block}.main{padding:28px}.shell{max-width:1240px}.head{margin-bottom:24px}.title{font-size:42px;font-weight:800;letter-spacing:-.05em;line-height:.95}.sub{color:var(--muted);font-size:14px}
+    .board{background:linear-gradient(180deg,rgba(15,20,26,.95),rgba(11,16,21,.96));border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);padding:28px 28px 34px}
+    .center{display:flex;justify-content:center}.agent{width:100%;max-width:220px;padding:16px 16px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.02);text-align:left}.agent.ceo{max-width:320px;text-align:center}.role{font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.12em;font-weight:700;margin-bottom:6px}.name{font-size:24px;font-weight:800;letter-spacing:-.04em;margin-bottom:6px}.meta{color:var(--muted);font-size:13px;line-height:1.45}
+    .vline{width:2px;height:34px;border-left:2px dashed rgba(143,183,255,.55);margin:0 auto}.split{display:grid;grid-template-columns:1fr 1fr;gap:32px;position:relative}.split:before{content:"";position:absolute;top:-18px;left:25%;right:25%;border-top:2px dashed rgba(143,183,255,.35)}
+    .col{display:grid;justify-items:center;gap:12px}.workers{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;width:100%;position:relative;padding-top:14px}.workers:before{content:"";position:absolute;top:0;left:10%;right:10%;border-top:2px dashed rgba(143,183,255,.28)}.workerWrap{display:grid;justify-items:center;gap:10px}.workerLine{width:2px;height:18px;border-left:2px dashed rgba(143,183,255,.4)}
+    .footer{margin-top:18px;color:var(--muted);font-size:12px}@media (max-width:1200px){.workers{grid-template-columns:repeat(3,1fr)}}@media (max-width:980px){.app{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid rgba(255,255,255,.05)}.split,.workers{grid-template-columns:1fr}.split:before,.workers:before{display:none}.main{padding:20px}}
   </style>
 </head>
 <body>
@@ -31,45 +31,31 @@
       </nav>
     </aside>
     <main class="main"><div class="shell">
-      <div class="head"><div class="title">Agents</div><div class="sub">CEO -> managers -> workers</div></div>
-      <section class="section">
-        <div class="centerTop">
-          <div class="agent big">
-            <div class="role">CEO</div>
-            <div class="name">Harold</div>
-            <div class="meta">orchestration · arbitrage · vision système</div>
-          </div>
-        </div>
-        <div class="dashed-v"></div>
-        <div class="managers">
-          <div class="managerCol">
-            <div class="agent big">
-              <div class="role">Manager · Reels</div>
-              <div class="name">Astrid</div>
-              <div class="meta">supervision du pôle reels</div>
-            </div>
-            <div class="dashed-v"></div>
+      <div class="head"><div class="title">Agents</div><div class="sub">1 CEO · 2 managers · 10 workers</div></div>
+      <section class="board">
+        <div class="center"><div class="agent ceo"><div class="role">CEO</div><div class="name">Harold</div><div class="meta">orchestration · arbitrage · vision système</div></div></div>
+        <div class="vline"></div>
+        <div class="split">
+          <div class="col">
+            <div class="agent"><div class="role">Manager · Reels</div><div class="name">Astrid</div><div class="meta">supervision du pôle reels</div></div>
+            <div class="vline"></div>
             <div class="workers">
-              <div class="workerWrap"><div class="dashed-small"></div><div class="agent"><div class="role">Worker</div><div class="name">Rustik</div><div class="meta">motivation reels</div></div></div>
-              <div class="workerWrap"><div class="dashed-small"></div><div class="agent"><div class="role">Worker</div><div class="name">Edrik</div><div class="meta">hooks reels</div></div></div>
-              <div class="workerWrap"><div class="dashed-small"></div><div class="agent"><div class="role">Worker</div><div class="name">Stoick</div><div class="meta">authority reels</div></div></div>
-              <div class="workerWrap"><div class="dashed-small"></div><div class="agent"><div class="role">Worker</div><div class="name">Mildew</div><div class="meta">story reels</div></div></div>
-              <div class="workerWrap"><div class="dashed-small"></div><div class="agent"><div class="role">Worker</div><div class="name">Snotlout</div><div class="meta">conversion reels</div></div></div>
+              <div class="workerWrap"><div class="workerLine"></div><div class="agent"><div class="role">Worker</div><div class="name">Rustik</div><div class="meta">motivation reels</div></div></div>
+              <div class="workerWrap"><div class="workerLine"></div><div class="agent"><div class="role">Worker</div><div class="name">Stoick</div><div class="meta">authority reels</div></div></div>
+              <div class="workerWrap"><div class="workerLine"></div><div class="agent"><div class="role">Worker</div><div class="name">Snotlout</div><div class="meta">conversion reels</div></div></div>
+              <div class="workerWrap"><div class="workerLine"></div><div class="agent"><div class="role">Worker</div><div class="name">Eret</div><div class="meta">proof reels</div></div></div>
+              <div class="workerWrap"><div class="workerLine"></div><div class="agent"><div class="role">Worker</div><div class="name">Mildew</div><div class="meta">story reels</div></div></div>
             </div>
           </div>
-          <div class="managerCol">
-            <div class="agent big">
-              <div class="role">Manager · Carousels</div>
-              <div class="name">Valka</div>
-              <div class="meta">supervision du pôle carousels</div>
-            </div>
-            <div class="dashed-v"></div>
+          <div class="col">
+            <div class="agent"><div class="role">Manager · Carousels</div><div class="name">Valka</div><div class="meta">supervision du pôle carousels</div></div>
+            <div class="vline"></div>
             <div class="workers">
-              <div class="workerWrap"><div class="dashed-small"></div><div class="agent"><div class="role">Worker</div><div class="name">Ruffnut</div><div class="meta">conversion carousels</div></div></div>
-              <div class="workerWrap"><div class="dashed-small"></div><div class="agent"><div class="role">Worker</div><div class="name">Tuffnut</div><div class="meta">educational carousels</div></div></div>
-              <div class="workerWrap"><div class="dashed-small"></div><div class="agent"><div class="role">Worker</div><div class="name">Gobber</div><div class="meta">authority carousels</div></div></div>
-              <div class="workerWrap"><div class="dashed-small"></div><div class="agent"><div class="role">Worker</div><div class="name">Fishlegs</div><div class="meta">deep-dive carousels</div></div></div>
-              <div class="workerWrap"><div class="dashed-small"></div><div class="agent"><div class="role">Worker</div><div class="name">Heather</div><div class="meta">narrative carousels</div></div></div>
+              <div class="workerWrap"><div class="workerLine"></div><div class="agent"><div class="role">Worker</div><div class="name">Ruffnut</div><div class="meta">conversion carousels</div></div></div>
+              <div class="workerWrap"><div class="workerLine"></div><div class="agent"><div class="role">Worker</div><div class="name">Tuffnut</div><div class="meta">educational carousels</div></div></div>
+              <div class="workerWrap"><div class="workerLine"></div><div class="agent"><div class="role">Worker</div><div class="name">Gobber</div><div class="meta">authority carousels</div></div></div>
+              <div class="workerWrap"><div class="workerLine"></div><div class="agent"><div class="role">Worker</div><div class="name">Fishlegs</div><div class="meta">deep-dive carousels</div></div></div>
+              <div class="workerWrap"><div class="workerLine"></div><div class="agent"><div class="role">Worker</div><div class="name">Heather</div><div class="meta">narrative carousels</div></div></div>
             </div>
           </div>
         </div>
