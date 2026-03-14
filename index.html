@@ -3,107 +3,182 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Content OS Architecture</title>
+  <title>OpenClaw Architecture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0b1020;
-      --panel: #121a30;
-      --panel-2: #0f172a;
-      --text: #edf2ff;
-      --muted: #9fb0d0;
-      --line: #24314f;
-      --accent: #7c9cff;
-      --accent-2: #44d1b6;
-      --warn: #ffb86b;
-      --shadow: 0 20px 60px rgba(0,0,0,.35);
-      --radius: 22px;
+      --bg: #0d0f12;
+      --bg-soft: #14171c;
+      --panel: #171b21;
+      --panel-2: #1d2229;
+      --text: #f3f1ea;
+      --muted: #b3b0a8;
+      --line: #2a3038;
+      --accent: #d9b36c;
+      --accent-soft: rgba(217,179,108,.14);
+      --shadow: 0 24px 80px rgba(0,0,0,.35);
+      --radius: 24px;
+      --max: 1180px;
     }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color: var(--text);
+      font-family: 'Manrope', system-ui, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(124,156,255,.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(68,209,182,.10), transparent 25%),
-        linear-gradient(180deg, #09101f 0%, #0b1020 100%);
+        radial-gradient(circle at top left, rgba(217,179,108,.08), transparent 22%),
+        linear-gradient(180deg, #0a0c0f 0%, #0d0f12 100%);
     }
-    .wrap {
-      width: min(1200px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 40px 0 80px;
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    .nav {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(13,15,18,.72);
+      border-bottom: 1px solid rgba(255,255,255,.04);
     }
+    .nav-inner {
+      display:flex; justify-content:space-between; align-items:center;
+      padding: 16px 0;
+    }
+    .brand {
+      font-family: 'Newsreader', serif;
+      font-size: 24px;
+      letter-spacing: -.02em;
+    }
+    .menu { display:flex; gap: 18px; color: var(--muted); font-size: 14px; }
     .hero {
-      display: grid;
+      padding: 72px 0 36px;
+      display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap: 20px;
-      margin-bottom: 28px;
+      gap: 24px;
+      align-items: stretch;
     }
     .card {
-      background: linear-gradient(180deg, rgba(18,26,48,.96), rgba(15,23,42,.96));
+      background: linear-gradient(180deg, rgba(23,27,33,.94), rgba(18,21,26,.94));
       border: 1px solid var(--line);
-      box-shadow: var(--shadow);
       border-radius: var(--radius);
-      padding: 24px;
+      box-shadow: var(--shadow);
+      padding: 28px;
     }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:10px;
+      font-size: 12px; letter-spacing:.14em; text-transform:uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .dot { width:8px; height:8px; border-radius:50%; background: var(--accent); box-shadow:0 0 18px var(--accent); }
     h1, h2, h3, p { margin: 0; }
-    h1 { font-size: clamp(32px, 5vw, 56px); line-height: 1; margin-bottom: 12px; }
-    h2 { font-size: 24px; margin-bottom: 10px; }
-    h3 { font-size: 18px; margin-bottom: 6px; }
-    .sub { color: var(--muted); font-size: 16px; line-height: 1.55; max-width: 60ch; }
-    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    h1 {
+      font-family: 'Newsreader', serif;
+      font-size: clamp(42px, 7vw, 76px);
+      line-height: .96;
+      letter-spacing: -.04em;
+      max-width: 9ch;
+      margin-bottom: 16px;
+    }
+    .lead {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+      max-width: 60ch;
+    }
+    .chips { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
     .chip {
       border: 1px solid var(--line);
       background: rgba(255,255,255,.03);
       color: var(--muted);
       border-radius: 999px;
-      padding: 8px 12px;
+      padding: 9px 13px;
       font-size: 13px;
     }
-    .stats { display:grid; gap: 14px; }
-    .stat { padding: 14px; border-radius: 16px; background: rgba(255,255,255,.03); border:1px solid var(--line); }
-    .stat b { display:block; font-size: 26px; margin-bottom: 4px; }
-    .section { margin-top: 24px; }
+    .stats { display:grid; gap: 16px; }
+    .stat { padding: 20px; }
+    .stat b {
+      display:block;
+      font-family: 'Newsreader', serif;
+      font-size: 38px;
+      margin-bottom: 6px;
+    }
+    .section { padding: 16px 0; }
+    .section-head {
+      display:flex; justify-content:space-between; align-items:end; gap:16px;
+      margin-bottom: 18px;
+    }
+    h2 {
+      font-family: 'Newsreader', serif;
+      font-size: 36px;
+      letter-spacing: -.03em;
+    }
+    .section-copy { color: var(--muted); max-width: 62ch; line-height: 1.65; }
     .grid-4 { display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .block {
-      min-height: 220px;
-      position: relative;
-      overflow: hidden;
-    }
+    .block { min-height: 220px; }
     .tag {
-      display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; margin-bottom:10px;
-      border: 1px solid var(--line); color: var(--muted); background: rgba(255,255,255,.04);
+      display:inline-block;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      margin-bottom: 12px;
     }
-    .block p { color: var(--muted); line-height: 1.5; font-size: 14px; }
-    .tree { display:grid; gap: 14px; }
+    h3 { font-size: 20px; margin-bottom: 8px; }
+    .block p { color: var(--muted); line-height: 1.65; font-size: 14px; }
+    .stack { display:grid; gap: 14px; }
     details {
-      background: rgba(255,255,255,.03);
+      background: rgba(255,255,255,.025);
       border:1px solid var(--line);
-      border-radius:16px;
+      border-radius:18px;
       padding: 16px 18px;
     }
-    summary { cursor:pointer; font-weight:700; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color:#d6e1ff; }
-    ul { margin: 12px 0 0 18px; color: var(--muted); }
-    li { margin: 6px 0; }
-    .footer { margin-top: 28px; color: var(--muted); font-size: 13px; text-align:center; }
-    @media (max-width: 900px) {
+    summary {
+      cursor:pointer;
+      font-weight:700;
+      list-style:none;
+    }
+    summary::-webkit-details-marker { display:none; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color:#e7dfcf; }
+    ul { margin: 12px 0 0 18px; color: var(--muted); line-height: 1.75; }
+    .footer {
+      padding: 34px 0 60px;
+      color: var(--muted);
+      text-align:center;
+      font-size: 13px;
+    }
+    @media (max-width: 960px) {
       .hero, .grid-4 { grid-template-columns: 1fr; }
+      h1 { max-width: none; }
+      .menu { display:none; }
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">OpenClaw Architecture</div>
+      <div class="menu">
+        <a href="#layers">Layers</a>
+        <a href="#workspace">Workspace</a>
+        <a href="#supabase">Supabase</a>
+        <a href="#roles">Roles</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
     <section class="hero">
       <div class="card">
-        <div class="tag">Content OS · OpenClaw · Supabase</div>
-        <h1>Architecture<br>claire, hiérarchique,<br>lisible.</h1>
-        <p class="sub">Une vue minimaliste de ton système : un bloc global partagé, un CEO qui orchestre, des managers intermédiaires si nécessaire, et des workers spécialisés qui produisent et s’auto-améliorent.</p>
+        <div class="eyebrow"><span class="dot"></span> Content OS / OpenClaw / Supabase</div>
+        <h1>Une architecture claire, pas un labyrinthe.</h1>
+        <p class="lead">Une lecture sobre et hiérarchique du système : un socle global partagé, un CEO qui orchestre, des managers si la structure grossit, et des workers spécialisés qui produisent, mesurent, apprennent et itèrent.</p>
         <div class="chips">
-          <span class="chip">Global partagé</span>
+          <span class="chip">Global</span>
           <span class="chip">CEO</span>
-          <span class="chip">Managers</span>
-          <span class="chip">Workers</span>
+          <span class="chip">Manager</span>
+          <span class="chip">Worker</span>
           <span class="chip">Analytics</span>
           <span class="chip">Ops</span>
           <span class="chip">Infra</span>
@@ -111,98 +186,134 @@
         </div>
       </div>
       <div class="stats">
-        <div class="card stat"><b>4</b>Niveaux hiérarchiques</div>
-        <div class="card stat"><b>8</b>Blocs structurels</div>
-        <div class="card stat"><b>1</b>Base Supabase commune</div>
+        <div class="card stat"><b>4</b>niveaux de lecture et de responsabilité</div>
+        <div class="card stat"><b>1</b>base commune avec séparation logique par agent</div>
+        <div class="card stat"><b>1</b>objectif : rendre le système lisible et pilotable</div>
       </div>
     </section>
 
-    <section class="section grid-4">
-      <div class="card block">
-        <div class="tag">Partagé</div>
-        <h3>Global</h3>
-        <p>Contexte, système, mémoire, état, analytics, protocoles et standards partagés par tous les agents.</p>
+    <section class="section" id="layers">
+      <div class="section-head">
+        <div>
+          <h2>Les couches</h2>
+          <p class="section-copy">Chaque couche existe pour une raison précise. Le but n’est pas de multiplier les dossiers, mais de séparer proprement ce qui est partagé, ce qui est hiérarchique, ce qui est analytique et ce qui est purement technique.</p>
+        </div>
       </div>
-      <div class="card block">
-        <div class="tag">Hiérarchie</div>
-        <h3>CEO</h3>
-        <p>Orchestre, arbitre, structure, consolide les learnings transversaux et pilote le système.</p>
-      </div>
-      <div class="card block">
-        <div class="tag">Hiérarchie</div>
-        <h3>Manager</h3>
-        <p>Couche intermédiaire optionnelle pour superviser un pôle ou plusieurs workers sans surcharger le CEO.</p>
-      </div>
-      <div class="card block">
-        <div class="tag">Hiérarchie</div>
-        <h3>Worker</h3>
-        <p>Produit, mesure, analyse, itère sur un format précis avec sa couche locale dédiée.</p>
+      <div class="grid-4">
+        <div class="card block">
+          <div class="tag">Partagé</div>
+          <h3>Global</h3>
+          <p>Le socle commun : mémoire durable, contexte métier, règles système, état opérationnel, standards partagés et protocoles.</p>
+        </div>
+        <div class="card block">
+          <div class="tag">Pilotage</div>
+          <h3>CEO</h3>
+          <p>La couche du chef d’orchestre : arbitrage, vision d’ensemble, délégation, learnings transversaux et roadmap structurelle.</p>
+        </div>
+        <div class="card block">
+          <div class="tag">Supervision</div>
+          <h3>Manager</h3>
+          <p>Le niveau intermédiaire, utile seulement quand plusieurs workers doivent être pilotés sans surcharge du CEO.</p>
+        </div>
+        <div class="card block">
+          <div class="tag">Exécution</div>
+          <h3>Worker</h3>
+          <p>La couche spécialisée : un agent, un format, un pipeline, des métriques, une boucle d’amélioration locale.</p>
+        </div>
       </div>
     </section>
 
-    <section class="section card">
-      <h2>Arborescence cible</h2>
-      <div class="tree">
+    <section class="section" id="workspace">
+      <div class="section-head">
+        <div>
+          <h2>Workspace</h2>
+          <p class="section-copy">La structure n’est pas là pour faire joli. Chaque bloc a une fonction : aligner, exécuter, synthétiser, documenter ou maintenir.</p>
+        </div>
+      </div>
+      <div class="card stack">
         <details open>
           <summary class="mono">/workspace</summary>
           <ul>
-            <li><span class="mono">memory/</span> · journal quotidien et historique récent</li>
-            <li><span class="mono">state/</span> · état opérationnel actif</li>
-            <li><span class="mono">context/</span> · vérité métier partagée</li>
-            <li><span class="mono">system/</span> · règles système globales</li>
-            <li><span class="mono">agents/shared/</span> · standards communs</li>
-            <li><span class="mono">agents/ceo/&lt;name&gt;_ceo/</span> · couche privée du CEO</li>
-            <li><span class="mono">agents/managers/&lt;name&gt;_manager/</span> · couche manager optionnelle</li>
-            <li><span class="mono">agents/workers/&lt;name&gt;_worker/</span> · couche privée worker</li>
-            <li><span class="mono">analytics/</span> · synthèses lisibles alimentées automatiquement</li>
-            <li><span class="mono">ops/</span> · protocoles et documentation opérationnelle</li>
-            <li><span class="mono">infra/</span> · SQL, scripts, migrations, maintenance technique</li>
-            <li><span class="mono">.learnings/</span> · erreurs, corrections, learnings techniques</li>
+            <li><span class="mono">memory/</span> — journal quotidien et historique récent</li>
+            <li><span class="mono">state/</span> — état opérationnel actif</li>
+            <li><span class="mono">context/</span> — vérité métier partagée</li>
+            <li><span class="mono">system/</span> — règles système globales</li>
+            <li><span class="mono">agents/shared/</span> — standards partagés entre agents</li>
+            <li><span class="mono">agents/ceo/&lt;name&gt;_ceo/</span> — couche privée du CEO</li>
+            <li><span class="mono">agents/managers/&lt;name&gt;_manager/</span> — couche manager optionnelle</li>
+            <li><span class="mono">agents/workers/&lt;name&gt;_worker/</span> — couche privée de chaque worker</li>
+            <li><span class="mono">analytics/</span> — synthèses lisibles alimentées automatiquement</li>
+            <li><span class="mono">ops/</span> — protocoles et docs opérationnelles</li>
+            <li><span class="mono">infra/</span> — SQL, scripts, migrations et maintenance technique</li>
+            <li><span class="mono">.learnings/</span> — erreurs, corrections et leçons d’exécution</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="supabase">
+      <div class="section-head">
+        <div>
+          <h2>Supabase</h2>
+          <p class="section-copy">La base commune ne remplace pas les docs. Elle stocke ce qui doit être structuré, historisé et comparé dans le temps.</p>
+        </div>
+      </div>
+      <div class="card stack">
+        <details open>
+          <summary>Tables cœur</summary>
+          <ul>
+            <li><span class="mono">agents</span> — registre des agents</li>
+            <li><span class="mono">content_items</span> — table centrale enrichie du contenu</li>
+            <li><span class="mono">metric_snapshots</span> — évolution des métriques</li>
+            <li><span class="mono">content_analyses</span> — analyses successives</li>
+            <li><span class="mono">human_feedback</span> — feedback humain</li>
+            <li><span class="mono">agent_learnings</span> — learnings consolidés</li>
+            <li><span class="mono">run_logs</span> — historique des exécutions</li>
+            <li><span class="mono">asset_registry</span> — assets liés au contenu</li>
           </ul>
         </details>
         <details>
-          <summary>Supabase</summary>
+          <summary>Tables optionnelles</summary>
           <ul>
-            <li><span class="mono">agents</span> · registre des agents</li>
-            <li><span class="mono">content_items</span> · table centrale enrichie</li>
-            <li><span class="mono">metric_snapshots</span> · évolution des métriques</li>
-            <li><span class="mono">content_analyses</span> · analyses successives</li>
-            <li><span class="mono">human_feedback</span> · feedback humain</li>
-            <li><span class="mono">agent_learnings</span> · learnings consolidés</li>
-            <li><span class="mono">run_logs</span> · historique des exécutions</li>
-            <li><span class="mono">asset_registry</span> · assets liés au contenu</li>
-            <li><span class="mono">content_variants</span> · optionnel</li>
-            <li><span class="mono">experiments</span> · optionnel</li>
-            <li><span class="mono">Storage/content-assets</span> · médias et rendus</li>
+            <li><span class="mono">content_variants</span> — variantes créatives si le workflow le justifie</li>
+            <li><span class="mono">experiments</span> — formalisme expérimental si nécessaire</li>
           </ul>
         </details>
       </div>
     </section>
 
-    <section class="section grid-4">
-      <div class="card block">
-        <div class="tag">Pilotage</div>
-        <h3>Analytics</h3>
-        <p>Pas la source brute. Une couche de synthèse auto-générée pour le CEO et les managers.</p>
+    <section class="section" id="roles">
+      <div class="section-head">
+        <div>
+          <h2>Qui lit quoi</h2>
+          <p class="section-copy">Tous les agents ne lisent pas tout. La hiérarchie documentaire doit suivre la hiérarchie agentique.</p>
+        </div>
       </div>
-      <div class="card block">
-        <div class="tag">Procédure</div>
-        <h3>Ops</h3>
-        <p>Explique comment le système lit, écrit, s’organise et reste cohérent dans le temps.</p>
-      </div>
-      <div class="card block">
-        <div class="tag">Technique</div>
-        <h3>Infra</h3>
-        <p>Tout ce qui est technique : SQL, migrations, scripts, maintenance. Pas du contexte métier.</p>
-      </div>
-      <div class="card block">
-        <div class="tag">Apprentissage</div>
-        <h3>.learnings</h3>
-        <p>Erreurs, corrections explicites, demandes de capacités et leçons d’exécution réutilisables.</p>
+      <div class="grid-4">
+        <div class="card block">
+          <div class="tag">Lecture</div>
+          <h3>CEO</h3>
+          <p>Lit le global, les analytics, les ops, sa couche privée et, à la demande, l’infra.</p>
+        </div>
+        <div class="card block">
+          <div class="tag">Lecture</div>
+          <h3>Manager</h3>
+          <p>Lit le global, sa couche manager, les analytics utiles et les synthèses des workers qu’il supervise.</p>
+        </div>
+        <div class="card block">
+          <div class="tag">Lecture</div>
+          <h3>Worker</h3>
+          <p>Lit le global utile, les standards partagés, sa couche locale et les protocoles ciblés si nécessaire.</p>
+        </div>
+        <div class="card block">
+          <div class="tag">But</div>
+          <h3>Principe</h3>
+          <p>Le bon agent lit le bon niveau d’information, au bon moment, sans être noyé dans le reste.</p>
+        </div>
       </div>
     </section>
 
-    <div class="footer">Design statique minimal · modifiable facilement · pensé pour comprendre vite ton architecture.</div>
-  </div>
+    <div class="footer">Prototype statique · dark mode · lecture sobre · structure pensée pour la compréhension plutôt que pour l’effet</div>
+  </main>
 </body>
 </html>
