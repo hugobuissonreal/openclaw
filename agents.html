@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpenClaw · Agent Hierarchy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0d10;--panel:#151a20;--panel2:#1b2129;--line:#2a313a;--text:#f4f1ea;--muted:#b6b0a4;
+      --gold:#d5b06b;--goldBg:rgba(213,176,107,.12);--blue:#8eabff;--green:#6fd1b4;--shadow:0 24px 70px rgba(0,0,0,.35);
+      --radius:24px;--max:1280px;
+    }
+    *{box-sizing:border-box} body{margin:0;color:var(--text);font-family:Manrope,system-ui,sans-serif;background:linear-gradient(180deg,#090b0e 0%,#0b0d10 100%)}
+    .wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto;padding:28px 0 70px}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:10px 0 28px}.nav a{color:var(--muted);text-decoration:none}.brand{font-family:Newsreader,serif;font-size:24px}
+    .hero,.row{display:grid;gap:18px}.hero{grid-template-columns:1.1fr .9fr;margin-bottom:20px}.row{grid-template-columns:1fr 1fr;margin-top:18px}
+    .card{background:linear-gradient(180deg,rgba(21,26,32,.95),rgba(16,20,25,.95));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px}
+    .eyebrow{display:inline-block;padding:7px 10px;border-radius:999px;background:var(--goldBg);color:var(--gold);font-size:12px;margin-bottom:14px}
+    h1,h2,h3,p{margin:0}.serif{font-family:Newsreader,serif;letter-spacing:-.04em} h1{font-size:clamp(40px,7vw,74px);line-height:.96;margin-bottom:16px} h2{font-size:32px;margin-bottom:10px} h3{font-size:19px;margin-bottom:8px}
+    p{color:var(--muted);line-height:1.65}
+    .schema{display:grid;gap:20px;justify-items:center;align-items:center;padding:10px 0}
+    .node{width:min(100%,420px);padding:20px 22px;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.03);text-align:center;position:relative}
+    .node.ceo{background:linear-gradient(180deg, rgba(213,176,107,.14), rgba(255,255,255,.03));}
+    .node.manager{background:linear-gradient(180deg, rgba(142,171,255,.12), rgba(255,255,255,.03));}
+    .node.worker{background:linear-gradient(180deg, rgba(111,209,180,.12), rgba(255,255,255,.03));}
+    .node .role{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+    .node .name{font-size:28px;font-family:Newsreader,serif;color:var(--text)}
+    .node .desc{margin-top:8px;font-size:14px}
+    .connector{width:2px;height:34px;background:linear-gradient(180deg,var(--line),rgba(255,255,255,.06));}
+    .workers{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}
+    .mini{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:12px}
+    .pill{padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03)}
+    .pill b{display:block;color:var(--text);margin-bottom:5px}.pill span{color:var(--muted);font-size:13px;line-height:1.45}
+    .flow{display:grid;gap:12px;margin-top:12px}.flowItem{padding:14px 16px;border-left:3px solid var(--gold);background:rgba(255,255,255,.025);border-radius:0 14px 14px 0}
+    .flowItem b{display:block;margin-bottom:4px}
+    .legend{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.lg{padding:8px 10px;border-radius:999px;font-size:12px;border:1px solid var(--line);color:var(--muted)}
+    @media (max-width: 980px){.hero,.row,.workers,.mini{grid-template-columns:1fr}.node{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="nav">
+      <div class="brand">OpenClaw Architecture</div>
+      <div><a href="./index.html">← Retour à la vue architecture</a></div>
+    </div>
+
+    <section class="hero">
+      <div class="card">
+        <div class="eyebrow">Vue globale des agents</div>
+        <h1 class="serif">Qui pilote, qui supervise, qui exécute.</h1>
+        <p>Cette page montre la hiérarchie agentique du système Content OS. L’objectif n’est pas seulement de voir des noms, mais de comprendre comment l’information circule entre le global, le CEO, les managers éventuels et les workers spécialisés.</p>
+        <div class="legend">
+          <span class="lg">CEO = orchestration</span>
+          <span class="lg">Manager = supervision</span>
+          <span class="lg">Worker = exécution</span>
+          <span class="lg">Global = cadre partagé</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="serif">Principe</h2>
+        <div class="flow">
+          <div class="flowItem"><b>Le global aligne tout le monde</b><span>Business, audience, stratégie, règles système, standards partagés.</span></div>
+          <div class="flowItem"><b>Le CEO orchestre</b><span>Il arbitre, délègue, consolide et décide des grandes évolutions.</span></div>
+          <div class="flowItem"><b>Le manager absorbe la complexité</b><span>Utile seulement quand plusieurs workers doivent être structurés.</span></div>
+          <div class="flowItem"><b>Le worker produit et apprend</b><span>Il exécute sur un format précis, mesure, analyse et améliore.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="serif">Schéma hiérarchique</h2>
+      <div class="schema">
+        <div class="node ceo">
+          <div class="role">CEO</div>
+          <div class="name">Harold</div>
+          <div class="desc">Vision globale, orchestration, délégation, arbitrage, learnings transversaux.</div>
+        </div>
+        <div class="connector"></div>
+        <div class="node manager">
+          <div class="role">MANAGER · optionnel</div>
+          <div class="name">Manager de pôle</div>
+          <div class="desc">Supervise un ensemble de workers quand la structure grossit. Peut être absent au début.</div>
+        </div>
+        <div class="connector"></div>
+        <div class="workers">
+          <div class="node worker">
+            <div class="role">WORKER</div>
+            <div class="name">Rustik</div>
+            <div class="desc">Réels motivation Instagram. Produit, publie, mesure, analyse, apprend.</div>
+          </div>
+          <div class="node worker">
+            <div class="role">WORKER · futur</div>
+            <div class="name">Autre worker</div>
+            <div class="desc">Carousel, LinkedIn, podcast, X… même logique, autre spécialité.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="row">
+      <div class="card">
+        <h2 class="serif">Ce que le CEO voit</h2>
+        <div class="mini">
+          <div class="pill"><b>Global</b><span>Contexte, système, mémoire, standards.</span></div>
+          <div class="pill"><b>Analytics</b><span>Synthèses hebdo, scoreboard, tendances.</span></div>
+          <div class="pill"><b>Ops</b><span>Protocoles, architecture, registre d’agents.</span></div>
+          <div class="pill"><b>CEO privé</b><span>Orchestration, roadmap, learnings système.</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="serif">Ce que le worker voit</h2>
+        <div class="mini">
+          <div class="pill"><b>Global utile</b><span>Business, audience, offres, stratégie.</span></div>
+          <div class="pill"><b>Shared</b><span>Validation, assets, workflows communs.</span></div>
+          <div class="pill"><b>Worker privé</b><span>Mission, format, pipeline, metrics.</span></div>
+          <div class="pill"><b>Protocoles ciblés</b><span>Écriture Supabase, lecture ciblée si besoin.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="row">
+      <div class="card">
+        <h2 class="serif">Flux d’information</h2>
+        <div class="flow">
+          <div class="flowItem"><b>1. Le global descend</b><span>Le cadre métier et système est partagé avec tous les niveaux.</span></div>
+          <div class="flowItem"><b>2. Le worker remonte</b><span>Résultats, analyses, learnings locaux, signaux de performance.</span></div>
+          <div class="flowItem"><b>3. Le CEO consolide</b><span>Il transforme les signaux locaux en décisions plus globales.</span></div>
+          <div class="flowItem"><b>4. Le manager filtre</b><span>Si présent, il sert de tampon entre pilotage global et exécution.</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <h2 class="serif">Décision structurelle</h2>
+        <p>Le manager n’est pas obligatoire au départ. Dans une petite architecture, on peut fonctionner avec :</p>
+        <div class="flow">
+          <div class="flowItem"><b>CEO → Worker</b><span>Quand il y a peu d’agents et peu de complexité.</span></div>
+          <div class="flowItem"><b>CEO → Manager → Workers</b><span>Quand le nombre de formats, de plateformes ou de workers commence à exploser.</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
