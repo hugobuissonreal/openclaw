@@ -6,22 +6,30 @@
   <title>OpenClaw · Arborescence</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#07090c;--bg2:#0c1015;--panel:#0f141a;--line:#1f2833;--text:#f3f7fb;--muted:#93a0af;--accent:#8fb7ff;--gold:#d2ab6f;--shadow:0 30px 80px rgba(0,0,0,.38);--radius:24px;--max:1240px}
-    *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--text);background:linear-gradient(180deg,var(--bg),var(--bg2))}a{text-decoration:none;color:inherit}.wrap{width:min(var(--max),calc(100% - 32px));margin:0 auto}.nav{position:sticky;top:0;z-index:20;background:rgba(7,9,12,.78);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.04)}.navin{display:flex;justify-content:space-between;align-items:center;padding:16px 0}.brand{font-family:Sora,sans-serif;font-size:22px;font-weight:700;letter-spacing:-.04em}.menu{display:flex;gap:10px}.menu a{padding:10px 14px;border-radius:999px;color:var(--muted);font-size:14px}.menu a.active,.menu a:hover{background:rgba(255,255,255,.03);border:1px solid var(--line);color:var(--text)}
-    .hero{padding:56px 0 26px;display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.card{background:linear-gradient(180deg,rgba(15,20,26,.94),rgba(11,16,21,.96));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px}.eyebrow{display:inline-block;padding:7px 10px;border-radius:999px;background:rgba(143,183,255,.10);color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
-    h1,h2,h3,p{margin:0}h1,h2,h3{font-family:Sora,sans-serif;letter-spacing:-.05em}h1{font-size:clamp(42px,8vw,82px);line-height:.92;max-width:10ch;margin-bottom:16px}h2{font-size:30px;margin-bottom:10px}.lead,.sub,p{color:var(--muted);line-height:1.7}.cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}details{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:20px;padding:18px 20px}summary{cursor:pointer;font-family:Sora,sans-serif}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#e8dcc7}ul{margin:12px 0 0 18px;color:var(--muted);line-height:1.7}
-    .footer{padding:34px 0 60px;color:var(--muted);text-align:center;font-size:13px}
-    @media (max-width:1000px){.hero,.cols{grid-template-columns:1fr}.menu{gap:6px}.menu a{padding:8px 10px}h1{max-width:none}}
+    :root{--bg:#07090c;--bg2:#0d1117;--panel:#0f141a;--line:#1d2530;--text:#f4f7fb;--muted:#8f9baa;--shadow:0 20px 60px rgba(0,0,0,.35);--radius:20px}
+    *{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--text);font-family:Inter,system-ui,sans-serif}.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}.side{border-right:1px solid rgba(255,255,255,.05);padding:24px 18px;position:sticky;top:0;height:100vh;background:rgba(7,9,12,.88);backdrop-filter:blur(14px)}.brand{font-size:20px;font-weight:800;letter-spacing:-.04em;margin-bottom:28px}.nav{display:grid;gap:8px}.nav a{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid transparent;border-radius:14px;color:var(--muted);font-size:14px}.nav a.active,.nav a:hover{background:rgba(255,255,255,.03);border-color:var(--line);color:var(--text)}.ico{width:16px;height:16px;display:inline-block}.main{padding:28px}.shell{max-width:1180px}.head{margin-bottom:24px}.title{font-size:42px;font-weight:800;letter-spacing:-.05em;line-height:.95}.sub{color:var(--muted);font-size:14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.card{background:linear-gradient(180deg,rgba(15,20,26,.95),rgba(11,16,21,.95));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}details{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:16px;padding:16px 18px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#e8dcc7}ul{margin:12px 0 0 18px;color:var(--muted);line-height:1.7}.footer{margin-top:18px;color:var(--muted);font-size:12px}@media (max-width:980px){.app,.grid{grid-template-columns:1fr}.side{position:relative;height:auto;border-right:0;border-bottom:1px solid rgba(255,255,255,.05)}.main{padding:20px}}
   </style>
 </head>
 <body>
-  <nav class="nav"><div class="wrap navin"><div class="brand">OpenClaw Architecture</div><div class="menu"><a href="./index.html">Architecture</a><a href="./agents.html">Agents</a><a href="./arborescence.html" class="active">Arborescence</a></div></div></nav>
-  <main class="wrap">
-    <section class="hero"><div class="card"><div class="eyebrow">Carte des blocs</div><h1>Workspace et Supabase, côte à côte.</h1><p class="lead">Une lecture claire de l’arborescence OpenClaw et de la structure Supabase, sans noyer la page sous des dizaines de cartes explicatives.</p></div><div class="card"><h2>Principe</h2><p>Le workspace structure le contexte, les rôles et les protocoles. Supabase stocke les données structurées, historisées et comparables dans le temps.</p></div></section>
-    <section class="cols"><div class="card"><h2>Workspace</h2><details open><summary class="mono">/workspace</summary><ul><li><span class="mono">memory/</span> journal récent</li><li><span class="mono">state/</span> état opérationnel</li><li><span class="mono">context/</span> vérité métier partagée</li><li><span class="mono">system/</span> règles système</li><li><span class="mono">agents/ceo|managers|workers/</span> couches locales par rôle</li><li><span class="mono">analytics/</span> synthèses automatiques</li><li><span class="mono">ops/</span> protocoles et documentation opérationnelle</li><li><span class="mono">infra/</span> technique, scripts, SQL</li><li><span class="mono">.learnings/</span> erreurs et apprentissages</li></ul></details></div><div class="card"><h2>Supabase</h2><details open><summary class="mono">public</summary><ul><li><span class="mono">agents</span></li><li><span class="mono">content_items</span></li><li><span class="mono">metric_snapshots</span></li><li><span class="mono">content_analyses</span></li><li><span class="mono">human_feedback</span></li><li><span class="mono">agent_learnings</span></li><li><span class="mono">run_logs</span></li><li><span class="mono">asset_registry</span></li><li><span class="mono">content_variants</span> · optionnel</li><li><span class="mono">experiments</span> · optionnel</li></ul></details><details style="margin-top:14px"><summary class="mono">storage</summary><ul><li><span class="mono">content-assets</span> · médias et rendus</li></ul></details></div></section>
-    <div class="footer">Page Arborescence · carte simple des blocs OpenClaw + Supabase.</div>
-  </main>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">OpenClaw</div>
+      <nav class="nav">
+        <a href="./index.html"><span class="ico">◫</span><span>Architecture</span></a>
+        <a href="./agents.html"><span class="ico">◎</span><span>Agents</span></a>
+        <a class="active" href="./arborescence.html"><span class="ico">▣</span><span>Arborescence</span></a>
+      </nav>
+    </aside>
+    <main class="main"><div class="shell">
+      <div class="head"><div class="title">Arborescence</div><div class="sub">Workspace + Supabase</div></div>
+      <div class="grid">
+        <div class="card"><details open><summary class="mono">/workspace</summary><ul><li>memory/</li><li>state/</li><li>context/</li><li>system/</li><li>agents/ceo/</li><li>agents/managers/</li><li>agents/workers/</li><li>analytics/</li><li>ops/</li><li>infra/</li><li>.learnings/</li></ul></details></div>
+        <div class="card"><details open><summary class="mono">supabase</summary><ul><li>agents</li><li>content_items</li><li>metric_snapshots</li><li>content_analyses</li><li>human_feedback</li><li>agent_learnings</li><li>run_logs</li><li>asset_registry</li><li>content_variants (optionnel)</li><li>experiments (optionnel)</li><li>storage/content-assets</li></ul></details></div>
+      </div>
+      <div class="footer">Lecture directe des blocs.</div>
+    </div></main>
+  </div>
 </body>
 </html>
