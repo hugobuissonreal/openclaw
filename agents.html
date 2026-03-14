@@ -15,14 +15,14 @@
     .main{display:grid;grid-template-rows:auto 1fr;padding:20px 24px;gap:16px;min-width:0}.top{display:flex;justify-content:space-between;align-items:end;gap:16px}.title{font-size:42px;font-weight:800;letter-spacing:-.05em;line-height:.95}.sub{color:var(--muted);font-size:14px}.controls{display:flex;gap:10px;align-items:center}.btn{padding:10px 12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.03);color:var(--text);cursor:pointer}.zoomLabel{color:var(--muted);font-size:13px;min-width:46px;text-align:right}
     .board{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.06);border-radius:24px;background:radial-gradient(circle at top, rgba(143,183,255,.06), transparent 18%),linear-gradient(180deg,rgba(15,20,26,.98),rgba(10,14,20,.98));box-shadow:var(--shadow)}
     .board:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);background-size:36px 36px;pointer-events:none}
-    .viewport{position:absolute;inset:0;cursor:grab}.viewport.dragging{cursor:grabbing}.scene{position:absolute;left:0;top:0;width:1600px;height:1100px;transform-origin:0 0}
-    svg{position:absolute;inset:0;width:1600px;height:1100px;pointer-events:none}.link{fill:none;stroke:rgba(143,183,255,.34);stroke-width:2.2;stroke-dasharray:6 8;stroke-linecap:round}.link.soft{stroke:rgba(143,183,255,.22)}
-    .node{position:absolute;width:190px;padding:16px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);box-shadow:0 14px 30px rgba(0,0,0,.22);backdrop-filter:blur(6px)}
-    .node.ceo{width:260px;border-color:rgba(216,176,106,.36)}.node.manager{border-color:rgba(143,183,255,.25)}.node.worker{border-color:rgba(120,213,187,.22)}
+    .viewport{position:absolute;inset:0;cursor:grab}.viewport.dragging{cursor:grabbing}.scene{position:absolute;left:0;top:0;transform-origin:0 0}
+    svg{position:absolute;left:0;top:0;pointer-events:none}.link{fill:none;stroke:rgba(143,183,255,.34);stroke-width:2.2;stroke-dasharray:6 8;stroke-linecap:round}
+    .node{position:absolute;width:188px;padding:16px;border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.08);box-shadow:0 14px 30px rgba(0,0,0,.22);backdrop-filter:blur(6px)}
+    .node.ceo{width:260px;border-color:rgba(216,176,106,.36)}.node.manager{width:220px;border-color:rgba(143,183,255,.25)}.node.worker{border-color:rgba(120,213,187,.22)}
     .role{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}.ceo .role{color:var(--ceo)}.manager .role{color:var(--manager)}.worker .role{color:var(--worker)}
     .name{font-size:24px;font-weight:800;letter-spacing:-.04em;margin-bottom:6px}.worker .name{font-size:18px}.meta{font-size:12px;color:var(--muted);line-height:1.45}
     .hint{position:absolute;right:16px;bottom:14px;color:var(--muted);font-size:12px;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.06);padding:8px 10px;border-radius:999px}
-    @media (max-width:980px){body{overflow:auto}.app{grid-template-columns:1fr;height:auto}.side{border-right:0;border-bottom:1px solid rgba(255,255,255,.05)}.main{min-height:100vh}.title{font-size:34px}}
+    @media (max-width:980px){body{overflow:auto}.app{grid-template-columns:1fr;height:auto}.side{border-right:0;border-bottom:1px solid rgba(255,255,255,.05)}.main{min-height:100vh;padding:20px}.title{font-size:34px}}
   </style>
 </head>
 <body>
@@ -35,13 +35,9 @@
         <a href="./arborescence.html">▣ <span>Arborescence</span></a>
       </nav>
     </aside>
-
     <main class="main">
       <div class="top">
-        <div>
-          <div class="title">Agents</div>
-          <div class="sub">Canvas navigable</div>
-        </div>
+        <div><div class="title">Agents</div><div class="sub">Canvas navigable</div></div>
         <div class="controls">
           <button class="btn" id="zoomOut">−</button>
           <button class="btn" id="reset">Reset</button>
@@ -49,105 +45,194 @@
           <div class="zoomLabel" id="zoomLabel">100%</div>
         </div>
       </div>
-
       <section class="board">
         <div class="viewport" id="viewport">
           <div class="scene" id="scene">
-            <svg viewBox="0 0 1600 1100" preserveAspectRatio="none">
-              <path class="link" d="M800 170 L800 230 L460 230 L460 290" />
-              <path class="link" d="M800 170 L800 230 L1140 230 L1140 290" />
-
-              <path class="link soft" d="M460 380 L460 450 L220 450 L220 530" />
-              <path class="link soft" d="M460 380 L460 450 L430 450 L430 530" />
-              <path class="link soft" d="M460 380 L460 450 L640 450 L640 530" />
-              <path class="link soft" d="M460 380 L460 450 L850 450 L850 530" />
-              <path class="link soft" d="M460 380 L460 450 L325 450 L325 760" />
-
-              <path class="link soft" d="M1140 380 L1140 450 L960 450 L960 530" />
-              <path class="link soft" d="M1140 380 L1140 450 L1170 450 L1170 530" />
-              <path class="link soft" d="M1140 380 L1140 450 L1380 450 L1380 530" />
-              <path class="link soft" d="M1140 380 L1140 450 L1065 450 L1065 760" />
-              <path class="link soft" d="M1140 380 L1140 450 L1275 450 L1275 760" />
-            </svg>
-
-            <div class="node ceo" style="left:670px;top:70px">
-              <div class="role">CEO</div>
-              <div class="name">Harold</div>
-              <div class="meta">orchestration · arbitrage · vision système</div>
-            </div>
-
-            <div class="node manager" style="left:365px;top:290px">
-              <div class="role">Manager · Reels</div>
-              <div class="name">Astrid</div>
-              <div class="meta">supervision du pôle reels</div>
-            </div>
-
-            <div class="node manager" style="left:1045px;top:290px">
-              <div class="role">Manager · Carousels</div>
-              <div class="name">Valka</div>
-              <div class="meta">supervision du pôle carousels</div>
-            </div>
-
-            <div class="node worker" style="left:125px;top:530px"><div class="role">Worker</div><div class="name">Rustik</div><div class="meta">motivation reels</div></div>
-            <div class="node worker" style="left:335px;top:530px"><div class="role">Worker</div><div class="name">Stoick</div><div class="meta">authority reels</div></div>
-            <div class="node worker" style="left:545px;top:530px"><div class="role">Worker</div><div class="name">Snotlout</div><div class="meta">conversion reels</div></div>
-            <div class="node worker" style="left:755px;top:530px"><div class="role">Worker</div><div class="name">Eret</div><div class="meta">proof reels</div></div>
-            <div class="node worker" style="left:230px;top:760px"><div class="role">Worker</div><div class="name">Mildew</div><div class="meta">story reels</div></div>
-
-            <div class="node worker" style="left:865px;top:530px"><div class="role">Worker</div><div class="name">Ruffnut</div><div class="meta">conversion carousels</div></div>
-            <div class="node worker" style="left:1075px;top:530px"><div class="role">Worker</div><div class="name">Tuffnut</div><div class="meta">educational carousels</div></div>
-            <div class="node worker" style="left:1285px;top:530px"><div class="role">Worker</div><div class="name">Gobber</div><div class="meta">authority carousels</div></div>
-            <div class="node worker" style="left:970px;top:760px"><div class="role">Worker</div><div class="name">Fishlegs</div><div class="meta">deep-dive carousels</div></div>
-            <div class="node worker" style="left:1180px;top:760px"><div class="role">Worker</div><div class="name">Heather</div><div class="meta">narrative carousels</div></div>
+            <svg id="links"></svg>
           </div>
         </div>
         <div class="hint">Glisser pour déplacer · molette pour zoomer</div>
       </section>
     </main>
   </div>
-
   <script>
+    const data = {
+      ceo: { name: 'Harold', meta: 'orchestration · arbitrage · vision système' },
+      managers: [
+        {
+          name: 'Astrid',
+          meta: 'supervision du pôle reels',
+          workers: [
+            ['Rustik', 'motivation reels'],
+            ['Stoick', 'authority reels'],
+            ['Snotlout', 'conversion reels'],
+            ['Eret', 'proof reels'],
+            ['Mildew', 'story reels']
+          ]
+        },
+        {
+          name: 'Valka',
+          meta: 'supervision du pôle carousels',
+          workers: [
+            ['Ruffnut', 'conversion carousels'],
+            ['Tuffnut', 'educational carousels'],
+            ['Gobber', 'authority carousels'],
+            ['Fishlegs', 'deep-dive carousels'],
+            ['Heather', 'narrative carousels']
+          ]
+        }
+      ]
+    };
+
     const viewport = document.getElementById('viewport');
     const scene = document.getElementById('scene');
+    const svg = document.getElementById('links');
     const zoomLabel = document.getElementById('zoomLabel');
-    let scale = 0.72;
-    let x = 40;
-    let y = 10;
+
+    const sizes = {
+      ceo: { w: 260, h: 98 },
+      manager: { w: 220, h: 92 },
+      worker: { w: 188, h: 86 }
+    };
+
+    const gap = { managerX: 260, workerX: 34, workerY: 150 };
+    const layout = { top: 70, managerY: 260, workerY1: 500, workerY2: 670 };
+
+    function makeNode(cls, role, name, meta, x, y, w) {
+      const el = document.createElement('div');
+      el.className = `node ${cls}`;
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+      el.innerHTML = `<div class="role">${role}</div><div class="name">${name}</div><div class="meta">${meta}</div>`;
+      scene.appendChild(el);
+      return { el, x, y, w, h: cls === 'worker' ? sizes.worker.h : cls === 'manager' ? sizes.manager.h : sizes.ceo.h };
+    }
+
+    function path(points) {
+      return points.map((p, i) => `${i ? 'L' : 'M'}${p[0]} ${p[1]}`).join(' ');
+    }
+
+    function link(points) {
+      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p.setAttribute('class', 'link');
+      p.setAttribute('d', path(points));
+      svg.appendChild(p);
+    }
+
+    const groupWidth = (sizes.worker.w * 3) + (gap.workerX * 2);
+    const centerX = 760;
+    const leftGroupX = centerX - 380 - groupWidth / 2;
+    const rightGroupX = centerX + 380 - groupWidth / 2;
+    const managerLeftX = centerX - 380 - sizes.manager.w / 2;
+    const managerRightX = centerX + 380 - sizes.manager.w / 2;
+    const ceoX = centerX - sizes.ceo.w / 2;
+
+    const ceo = makeNode('ceo', 'CEO', data.ceo.name, data.ceo.meta, ceoX, layout.top, sizes.ceo.w);
+    const managers = [
+      makeNode('manager', 'Manager · Reels', data.managers[0].name, data.managers[0].meta, managerLeftX, layout.managerY, sizes.manager.w),
+      makeNode('manager', 'Manager · Carousels', data.managers[1].name, data.managers[1].meta, managerRightX, layout.managerY, sizes.manager.w)
+    ];
+
+    const groups = [leftGroupX, rightGroupX];
+    const workerNodes = [[], []];
+
+    data.managers.forEach((m, mi) => {
+      m.workers.forEach((w, wi) => {
+        const row = wi < 3 ? 0 : 1;
+        const col = row === 0 ? wi : wi - 3;
+        const colsInRow = row === 0 ? 3 : 2;
+        const rowWidth = colsInRow * sizes.worker.w + (colsInRow - 1) * gap.workerX;
+        const rowStart = groups[mi] + (groupWidth - rowWidth) / 2;
+        const x = rowStart + col * (sizes.worker.w + gap.workerX);
+        const y = row === 0 ? layout.workerY1 : layout.workerY2;
+        workerNodes[mi].push(makeNode('worker', 'Worker', w[0], w[1], x, y, sizes.worker.w));
+      });
+    });
+
+    const allNodes = [ceo, ...managers, ...workerNodes[0], ...workerNodes[1]];
+    const sceneWidth = 1600;
+    const sceneHeight = 960;
+    scene.style.width = sceneWidth + 'px';
+    scene.style.height = sceneHeight + 'px';
+    svg.setAttribute('viewBox', `0 0 ${sceneWidth} ${sceneHeight}`);
+    svg.setAttribute('width', sceneWidth);
+    svg.setAttribute('height', sceneHeight);
+
+    // CEO -> managers
+    const ceoBottom = [ceo.x + ceo.w / 2, ceo.y + ceo.h];
+    const splitY = 210;
+    const leftMgrTop = [managers[0].x + managers[0].w / 2, managers[0].y];
+    const rightMgrTop = [managers[1].x + managers[1].w / 2, managers[1].y];
+    link([ceoBottom, [ceoBottom[0], splitY], [leftMgrTop[0], splitY], leftMgrTop]);
+    link([ceoBottom, [ceoBottom[0], splitY], [rightMgrTop[0], splitY], rightMgrTop]);
+
+    // Managers -> workers by grouped rows, avoiding overlaps
+    managers.forEach((mgr, mi) => {
+      const group = workerNodes[mi];
+      const mgrBottom = [mgr.x + mgr.w / 2, mgr.y + mgr.h];
+      const hubY = mgrBottom[1] + 55;
+      const topRow = group.filter(n => n.y === layout.workerY1);
+      const bottomRow = group.filter(n => n.y === layout.workerY2);
+      const minTopX = Math.min(...topRow.map(n => n.x + n.w / 2));
+      const maxTopX = Math.max(...topRow.map(n => n.x + n.w / 2));
+      link([mgrBottom, [mgrBottom[0], hubY], [minTopX, hubY]]);
+      link([[mgrBottom[0], hubY], [maxTopX, hubY]]);
+      topRow.forEach(n => link([[n.x + n.w / 2, hubY], [n.x + n.w / 2, n.y]]));
+      if (bottomRow.length) {
+        const minBottomX = Math.min(...bottomRow.map(n => n.x + n.w / 2));
+        const maxBottomX = Math.max(...bottomRow.map(n => n.x + n.w / 2));
+        const hubY2 = layout.workerY2 - 46;
+        link([[mgrBottom[0], hubY], [mgrBottom[0], hubY2], [minBottomX, hubY2]]);
+        link([[mgrBottom[0], hubY2], [maxBottomX, hubY2]]);
+        bottomRow.forEach(n => link([[n.x + n.w / 2, hubY2], [n.x + n.w / 2, n.y]]));
+      }
+    });
+
+    let baseScale = 1;
+    let scale = 1;
+    let x = 0;
+    let y = 0;
     let dragging = false;
     let startX = 0, startY = 0, originX = 0, originY = 0;
 
-    function render(){
-      scene.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
-      zoomLabel.textContent = Math.round(scale * 100) + '%';
+    function fitToViewport() {
+      const rect = viewport.getBoundingClientRect();
+      const fitX = (rect.width - 60) / sceneWidth;
+      const fitY = (rect.height - 60) / sceneHeight;
+      baseScale = Math.min(fitX, fitY, 1);
+      scale = baseScale;
+      x = (rect.width - sceneWidth * scale) / 2;
+      y = 24;
+      render();
     }
-    function clampScale(v){ return Math.max(0.45, Math.min(1.4, v)); }
-    render();
+    function render() {
+      scene.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+      zoomLabel.textContent = Math.round((scale / baseScale) * 100) + '%';
+    }
+    function clampScale(v) { return Math.max(baseScale * 0.65, Math.min(baseScale * 2.2, v)); }
 
-    viewport.addEventListener('mousedown', (e)=>{
-      dragging = true;
-      viewport.classList.add('dragging');
-      startX = e.clientX; startY = e.clientY;
-      originX = x; originY = y;
+    viewport.addEventListener('mousedown', (e) => {
+      dragging = true; viewport.classList.add('dragging');
+      startX = e.clientX; startY = e.clientY; originX = x; originY = y;
     });
-    window.addEventListener('mousemove', (e)=>{
-      if(!dragging) return;
+    window.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
       x = originX + (e.clientX - startX);
       y = originY + (e.clientY - startY);
       render();
     });
-    window.addEventListener('mouseup', ()=>{
-      dragging = false;
-      viewport.classList.remove('dragging');
-    });
-    viewport.addEventListener('wheel', (e)=>{
+    window.addEventListener('mouseup', () => { dragging = false; viewport.classList.remove('dragging'); });
+    viewport.addEventListener('wheel', (e) => {
       e.preventDefault();
-      const delta = e.deltaY < 0 ? 0.06 : -0.06;
+      const delta = e.deltaY < 0 ? 0.08 : -0.08;
       scale = clampScale(scale + delta);
       render();
-    }, {passive:false});
-    document.getElementById('zoomIn').addEventListener('click', ()=>{ scale = clampScale(scale + 0.08); render(); });
-    document.getElementById('zoomOut').addEventListener('click', ()=>{ scale = clampScale(scale - 0.08); render(); });
-    document.getElementById('reset').addEventListener('click', ()=>{ scale = 0.72; x = 40; y = 10; render(); });
+    }, { passive: false });
+    document.getElementById('zoomIn').addEventListener('click', () => { scale = clampScale(scale + 0.08); render(); });
+    document.getElementById('zoomOut').addEventListener('click', () => { scale = clampScale(scale - 0.08); render(); });
+    document.getElementById('reset').addEventListener('click', fitToViewport);
+    window.addEventListener('resize', fitToViewport);
+    fitToViewport();
   </script>
 </body>
 </html>
